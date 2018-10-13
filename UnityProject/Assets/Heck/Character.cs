@@ -18,10 +18,10 @@ public class Character : MonoBehaviour {
 
     private float elapsedAnimationTime;
 
-    public const float gravitySpeed = 15;
+    public const float gravitySpeed = 20;
     public const float gravityOffset = 0.05f;
     public const int gravityCollisionLayer = 1 << 10;
-    public const float jumpGravityFactor = 0.5f;
+    public const float jumpGravityFactor = 0.40f;
     public const float jumpVelocity = 5;
     private Vector3 velocity;
     private float gravityFactor = 1;
