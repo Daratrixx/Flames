@@ -133,13 +133,19 @@ public class PlayerController : MonoBehaviour {
         if (movement.magnitude > 0.001f) {
             Vector3 direction = playerCamera.transform.forward * forWalk + playerCamera.transform.right * sideWalk;
             direction.y = 0;
-            if (inputs.RunDown()) {
+            if(inputs.JumpPressed()) {
+                character.Jump();
+            }/* else if (inputs.RunDown()) {
                 character.Run(direction.normalized);
-            } else {
+            }*/ else {
                 character.Walk(direction.normalized);
             }
         } else {
-            character.NoMove();
+            if (inputs.JumpPressed()) {
+                character.Jump();
+            } else {
+                character.NoMove();
+            }
         }
     }
 

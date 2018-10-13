@@ -41,6 +41,7 @@ public class PlayerInput : ScriptableObject {
     public bool RollPressed() { return Input.GetKeyDown(roll); }
     public bool LockOnPressed() { return Input.GetKeyDown(lockOn); }
     public bool RunDown() { return Input.GetKey(run); }
+    public bool JumpPressed() { return Input.GetKeyDown(jump); }
 
     public KeyCode forward = KeyCode.Z;
     public KeyCode leftward = KeyCode.Q;
@@ -57,6 +58,7 @@ public class PlayerInput : ScriptableObject {
     public KeyCode spell2 = KeyCode.Alpha3;
     public KeyCode spell3 = KeyCode.Alpha4;
 
+    public KeyCode jump = KeyCode.Space;
     public KeyCode run = KeyCode.Space;
     public KeyCode roll = KeyCode.Space;
     public KeyCode lockOn = KeyCode.Mouse2;

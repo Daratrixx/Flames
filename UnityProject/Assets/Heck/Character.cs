@@ -18,9 +18,12 @@ public class Character : MonoBehaviour {
 
     private float elapsedAnimationTime;
 
-    private float gravitySpeed = 15;
+    public const float gravitySpeed = 15;
     public const float gravityOffset = 0.05f;
     public const int gravityCollisionLayer = 1 << 10;
+    public const float jumpGravityFactor = 0.5f;
+    private Vector3 velocity;
+    private float gravityFactor = 1;
 
     public Vector3 groundPosition {
         get {
@@ -57,14 +60,20 @@ public class Character : MonoBehaviour {
     public Vector3 up {
         get { return transform.up; }
     }
-    
+
     public bool isMoving;
     public bool isRunning;
+    public bool isGrounded;
+    public bool isFalling;
+    public bool isJumping;
+
     public void Walk(Vector3 direction) {
-        if (!isMoving || isRunning) {
-            isRunning = false;
-            isMoving = true;
-            CrossFadeAnimation("MoveForward", 0.3f);
+        if (isGrounded) {
+            if (!isMoving || isRunning) {
+                isRunning = false;
+                isMoving = true;
+                CrossFadeAnimation("MoveForward", 0.3f);
+            }
         }
         transform.position += direction * walkSpeed * Time.deltaTime;
         direction = Vector3.Slerp(forward, direction, rotationSpeed * Time.deltaTime);
@@ -72,9 +81,11 @@ public class Character : MonoBehaviour {
         forward = direction.normalized;
     }
     public void Strafe(Vector3 aim, Vector3 movement) {
-        if (!isMoving) {
-            isMoving = true;
-            CrossFadeAnimation("MoveForward", 0.3f);
+        if (isGrounded) {
+            if (!isMoving) {
+                isMoving = true;
+                CrossFadeAnimation("MoveForward", 0.3f);
+            }
         }
         transform.position += transform.rotation * movement * walkSpeed * Time.deltaTime;
         aim = Vector3.Slerp(forward, aim, rotationSpeed * Time.deltaTime);
@@ -82,15 +93,25 @@ public class Character : MonoBehaviour {
         forward = aim.normalized;
     }
     public void Run(Vector3 direction) {
-        if (!isMoving || !isRunning) {
-            isRunning = true;
-            isMoving = true;
-            CrossFadeAnimation("Run", 0.3f);
+        if (isGrounded) {
+            if (!isMoving || !isRunning) {
+                isRunning = true;
+                isMoving = true;
+                CrossFadeAnimation("Run", 0.3f);
+            }
         }
         transform.position += direction * runSpeed * Time.deltaTime;
         direction = Vector3.Slerp(forward, direction, rotationSpeed * Time.deltaTime);
         direction.y = 0;
         forward = direction.normalized;
+    }
+    public void Jump() {
+        if (isGrounded) {
+            isJumping = true;
+            velocity.y = 5;
+            gravityFactor = jumpGravityFactor;
+            CrossFadeAnimation("Jumping", 0.3f);
+        }
     }
     public void Rotate(Vector3 direction) {
         direction = Vector3.Slerp(forward, direction, rotationSpeed * Time.deltaTime);
@@ -99,13 +120,14 @@ public class Character : MonoBehaviour {
         NoMove();
     }
     public void NoMove() {
-        if (isMoving) {
-            isMoving = false;
-            isRunning = false;
-            BackToStandAnimation();
+        if (isGrounded) {
+            if (isMoving) {
+                isMoving = false;
+                isRunning = false;
+                BackToStandAnimation();
+            }
         }
     }
-
 
     #region ANIMATION_CONTROLLS
 
@@ -144,12 +166,38 @@ public class Character : MonoBehaviour {
     #endregion
 
     void Update() {
-        float gravityEffect = Time.deltaTime * gravitySpeed;
+        if (isJumping && velocity.y < 0) {
+            isJumping = false;
+        }
+        if (!isFalling && velocity.y < 0) {
+            isFalling = true;
+            gravityFactor = 1;
+            CrossFadeAnimation("Falling", 0.3f);
+        }
+        float gravityEffect = Time.deltaTime * gravitySpeed * gravityFactor;
+        velocity.y -= gravityEffect;
+        gravityEffect = velocity.y * Time.deltaTime;
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hitInfo, gravityEffect + 1, gravityCollisionLayer)) {
-            transform.position = hitInfo.point + Vector3.up * gravityOffset;
-        } else {
-            transform.position -= Vector3.up * gravityEffect;
+        if(gravityEffect < 0) {
+            if(Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hitInfo, -gravityEffect + 1, gravityCollisionLayer)) {
+                transform.position = hitInfo.point + Vector3.up * gravityOffset;
+                isGrounded = true;
+                velocity.y = 0;
+                isFalling = false;
+            } else {
+                transform.position += Vector3.up * gravityEffect;
+                isGrounded = false;
+            }
+        } else if (gravityEffect > 0) {
+            if(Physics.Raycast(transform.position + Vector3.up * gravityOffset, Vector3.up, out hitInfo, gravityEffect + 1, gravityCollisionLayer)) {
+                transform.position = hitInfo.point - Vector3.up * gravityOffset;
+                isGrounded = true;
+                velocity.y = 0;
+                isFalling = false;
+            } else {
+                transform.position += Vector3.up * gravityEffect;
+                isGrounded = false;
+            }
         }
     }
 
