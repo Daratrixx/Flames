@@ -22,6 +22,7 @@ public class Character : MonoBehaviour {
     public const float gravityOffset = 0.05f;
     public const int gravityCollisionLayer = 1 << 10;
     public const float jumpGravityFactor = 0.5f;
+    public const float jumpVelocity = 5;
     private Vector3 velocity;
     private float gravityFactor = 1;
 
@@ -107,10 +108,15 @@ public class Character : MonoBehaviour {
     }
     public void Jump() {
         if (isGrounded) {
+            if (isMoving) {
+                isMoving = false;
+                isRunning = false;
+            }
             isJumping = true;
-            velocity.y = 5;
+            velocity.y = jumpVelocity;
             gravityFactor = jumpGravityFactor;
-            CrossFadeAnimation("Jumping", 0.3f);
+            //CrossFadeAnimation("Jumping", 0.3f);
+            CrossFadeAnimation("Stand", 0.3f);
         }
     }
     public void Rotate(Vector3 direction) {
@@ -166,7 +172,8 @@ public class Character : MonoBehaviour {
     #endregion
 
     void Update() {
-        if (isJumping && velocity.y < 0) {
+        // detect end of jump upward movement
+        if (isJumping && velocity.y <= 0) {
             isJumping = false;
         }
         if (!isFalling && velocity.y < 0) {
@@ -174,29 +181,28 @@ public class Character : MonoBehaviour {
             gravityFactor = 1;
             CrossFadeAnimation("Falling", 0.3f);
         }
-        float gravityEffect = Time.deltaTime * gravitySpeed * gravityFactor;
-        velocity.y -= gravityEffect;
-        gravityEffect = velocity.y * Time.deltaTime;
+        float acceleration = Time.deltaTime * gravitySpeed * gravityFactor;
+        velocity.y -= acceleration;
+        float gravityEffect = velocity.y * Time.deltaTime;
         RaycastHit hitInfo;
-        if(gravityEffect < 0) {
-            if(Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hitInfo, -gravityEffect + 1, gravityCollisionLayer)) {
+        if (gravityEffect < 0) {
+            if (Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hitInfo, -gravityEffect + 1 + gravityOffset, gravityCollisionLayer)) {
                 transform.position = hitInfo.point + Vector3.up * gravityOffset;
-                isGrounded = true;
                 velocity.y = 0;
-                isFalling = false;
+                if (isFalling) isFalling = false;
+                isGrounded = true;
             } else {
                 transform.position += Vector3.up * gravityEffect;
-                isGrounded = false;
+                if (isGrounded) isGrounded = false;
             }
         } else if (gravityEffect > 0) {
-            if(Physics.Raycast(transform.position + Vector3.up * gravityOffset, Vector3.up, out hitInfo, gravityEffect + 1, gravityCollisionLayer)) {
+            if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, gravityEffect + 1 + gravityOffset, gravityCollisionLayer)) {
                 transform.position = hitInfo.point - Vector3.up * gravityOffset;
-                isGrounded = true;
                 velocity.y = 0;
-                isFalling = false;
+                if (isJumping) isJumping = false;
             } else {
                 transform.position += Vector3.up * gravityEffect;
-                isGrounded = false;
+                if (isGrounded) isGrounded = false;
             }
         }
     }
