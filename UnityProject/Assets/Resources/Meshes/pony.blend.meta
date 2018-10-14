@@ -64,6 +64,7 @@ ModelImporter:
     7400000: Default Take
     7400002: Stand
     7400004: Walk
+    7400006: Walk_001
     9500000: //RootNode
     13700000: Cylinder_Cylinder_001
   externalObjects: {}
@@ -123,10 +124,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk
-      takeName: Walk
+      name: Walk_001
+      takeName: Walk_001
       firstFrame: 0
-      lastFrame: 10
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
