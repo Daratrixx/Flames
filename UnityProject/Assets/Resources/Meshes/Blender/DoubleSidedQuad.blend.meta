@@ -1,37 +1,19 @@
 fileFormatVersion: 2
-guid: bbf6cc7b4617a044a921b24ddaf57eff
+guid: 059b8ea1faaab3b41b3e720033672519
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Cube
-    100004: Plane
     400000: //RootNode
-    400002: Cube
-    400004: Plane
-    2100000: None__leaves_png
-    2100002: Material__wood_png
-    2300000: Cube
-    2300002: Plane
-    3300000: Cube
-    3300002: Plane
+    2100000: unnamed
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Plane
-    4300002: Cube
     7400000: Default Take
     9500000: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material__wood_png
-    second: {fileID: 2100000, guid: 01a8ec17a0294b34884a97c36029183a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: None__leaves_png
-    second: {fileID: 2100000, guid: a1d5d7d769fa2f24b9205ba189659f90, type: 2}
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -103,7 +85,7 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0

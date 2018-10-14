@@ -27,6 +27,10 @@ ModelImporter:
     100042: Head
     100044: Neck
     100046: //RootNode
+    100048: HipLeft
+    100050: HipRight
+    100052: ShoulderLeft
+    100054: ShoulderRight
     400000: Armature_002
     400002: Back
     400004: Bone_004
@@ -51,6 +55,10 @@ ModelImporter:
     400042: Head
     400044: Neck
     400046: //RootNode
+    400048: HipLeft
+    400050: HipRight
+    400052: ShoulderLeft
+    400054: ShoulderRight
     2100000: None
     4300000: Cylinder_Cylinder_001
     7400000: Default Take
