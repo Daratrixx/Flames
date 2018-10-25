@@ -31,6 +31,14 @@ ModelImporter:
     100050: HipRight
     100052: ShoulderLeft
     100054: ShoulderRight
+    100056: AnkleLeft
+    100058: AnkleRight
+    100060: Armature
+    100062: Cylinder_Cylinder_000
+    100064: KneeLeft
+    100066: KneeRight
+    100068: LapLeft
+    100070: LapRight
     400000: Armature_002
     400002: Back
     400004: Bone_004
@@ -59,17 +67,30 @@ ModelImporter:
     400050: HipRight
     400052: ShoulderLeft
     400054: ShoulderRight
+    400056: AnkleLeft
+    400058: AnkleRight
+    400060: Armature
+    400062: Cylinder_Cylinder_000
+    400064: KneeLeft
+    400066: KneeRight
+    400068: LapLeft
+    400070: LapRight
     2100000: None
+    2100002: unnamed
     4300000: Cylinder_Cylinder_001
+    4300002: Cylinder_Cylinder_000
     7400000: Default Take
     7400002: Stand
     7400004: Walk
-    7400006: Walk_001
+    7400006: Walk
+    7400008: Falling
+    7400010: Jumping
     9500000: //RootNode
     13700000: Cylinder_Cylinder_001
+    13700002: Cylinder_Cylinder_000
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -124,10 +145,66 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Walk_001
+      name: Walk
       takeName: Walk_001
       firstFrame: 0
       lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Falling
+      takeName: Falling
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Jumping
+      takeName: Jumping
+      firstFrame: 0
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

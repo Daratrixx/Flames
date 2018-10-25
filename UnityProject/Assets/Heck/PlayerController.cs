@@ -135,9 +135,9 @@ public class PlayerController : MonoBehaviour {
             direction.y = 0;
             if(inputs.JumpPressed()) {
                 character.Jump();
-            }/* else if (inputs.RunDown()) {
+            } else if (inputs.RunDown()) {
                 character.Run(direction.normalized);
-            }*/ else {
+            } else {
                 character.Walk(direction.normalized);
             }
         } else {

@@ -23,6 +23,7 @@ MonoBehaviour:
   spell1: 50
   spell2: 51
   spell3: 52
-  run: 32
+  jump: 32
+  run: 304
   roll: 32
   lockOn: 325
