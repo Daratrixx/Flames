@@ -505,11 +505,11 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1270653026}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400000, guid: bbf6cc7b4617a044a921b24ddaf57eff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 61.73208
+      value: 11.732079
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bbf6cc7b4617a044a921b24ddaf57eff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -517,7 +517,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bbf6cc7b4617a044a921b24ddaf57eff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.609837
+      value: -19.390163
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bbf6cc7b4617a044a921b24ddaf57eff, type: 3}
       propertyPath: m_LocalRotation.x
@@ -537,7 +537,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: bbf6cc7b4617a044a921b24ddaf57eff, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: bbf6cc7b4617a044a921b24ddaf57eff, type: 3}
       propertyPath: m_Layer
@@ -984,7 +984,7 @@ Terrain:
   serializedVersion: 3
   m_TerrainData: {fileID: 15600000, guid: ec2227080b223344cb852e47c0dd5d37, type: 2}
   m_TreeDistance: 2000
-  m_TreeBillboardDistance: 50
+  m_TreeBillboardDistance: 5
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
@@ -994,7 +994,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_CastShadows: 1
   m_DrawHeightmap: 1
-  m_DrawTreesAndFoliage: 0
+  m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialType: 0
   m_LegacySpecular:
@@ -1003,7 +1003,7 @@ Terrain:
   m_LegacyShininess: 0.078125
   m_MaterialTemplate: {fileID: 0}
   m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
+  m_PreserveTreePrototypeLayers: 1
   m_ScaleInLightmap: 0.1024
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &1270653026
@@ -1015,9 +1015,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -50, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1437983864}
-  - {fileID: 1948853093}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1026,11 +1024,11 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1270653026}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 400000, guid: 126e7515d3aeea94e8e4d57a017ea44a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 73
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 126e7515d3aeea94e8e4d57a017ea44a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1038,7 +1036,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 126e7515d3aeea94e8e4d57a017ea44a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.5
+      value: -37.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 126e7515d3aeea94e8e4d57a017ea44a, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1058,7 +1056,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 126e7515d3aeea94e8e4d57a017ea44a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 126e7515d3aeea94e8e4d57a017ea44a, type: 3}
       propertyPath: m_LocalScale.x
@@ -5682,11 +5680,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!4 &1437983864 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: bbf6cc7b4617a044a921b24ddaf57eff,
-    type: 3}
-  m_PrefabInternal: {fileID: 577906339}
 --- !u!1 &1687137997
 GameObject:
   m_ObjectHideFlags: 0
