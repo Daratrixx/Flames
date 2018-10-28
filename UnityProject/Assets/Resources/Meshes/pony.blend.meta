@@ -39,6 +39,7 @@ ModelImporter:
     100066: KneeRight
     100068: LapLeft
     100070: LapRight
+    100072: ManeSpot
     400000: Armature_002
     400002: Back
     400004: Bone_004
@@ -75,10 +76,14 @@ ModelImporter:
     400066: KneeRight
     400068: LapLeft
     400070: LapRight
+    400072: ManeSpot
     2100000: None
     2100002: unnamed
+    2300000: ManeSpot
+    3300000: ManeSpot
     4300000: Cylinder_Cylinder_001
     4300002: Cylinder_Cylinder_000
+    4300004: ManeSpot
     7400000: Default Take
     7400002: Stand
     7400004: Walk
@@ -88,6 +93,7 @@ ModelImporter:
     9500000: //RootNode
     13700000: Cylinder_Cylinder_001
     13700002: Cylinder_Cylinder_000
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 0
