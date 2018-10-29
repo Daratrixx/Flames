@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
 
     public Character character;
     public Camera playerCamera;
-    public new CapsuleCollider collider;
 
     public Vector2 cameraAngleLimits = new Vector2(35,-35);
     public float cameraAngle = 20;
@@ -30,18 +29,6 @@ public class PlayerController : MonoBehaviour {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        if (character == null)
-            character = GetComponent<Character>();
-        if (character == null)
-            character = gameObject.AddComponent<Character>();
-        if (playerCamera == null)
-            playerCamera = GetComponent<Camera>();
-        if (playerCamera == null)
-            playerCamera = gameObject.AddComponent<Camera>();
-        if (collider == null)
-            collider = GetComponent<CapsuleCollider>();
-        if (collider == null)
-            collider = gameObject.AddComponent<CapsuleCollider>();
         ResetCamera();
     }
 
@@ -58,6 +45,7 @@ public class PlayerController : MonoBehaviour {
     public void LateUpdate() {
         UpdateCamera(cameraFollowSpeed * Time.deltaTime);
     }
+
     private Vector3 lastAnchor;
     private Vector3 cameraAnchor {
         get {
@@ -116,9 +104,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void ControllCamera() {
-        cameraAngle += UnityEngine.Input.GetAxis("Mouse Y");
-        cameraRotation += UnityEngine.Input.GetAxis("Mouse X");
+        Vector2 camera = inputs.GetCameraAxis();
+        cameraAngle += camera.y;
+        cameraRotation += camera.x;
         //cameraAngle = Mathf.Clamp(cameraAngle, cameraAngleLimits.x, cameraAngleLimits.y);
+        if (cameraAngle > cameraAngleLimits.x) cameraAngle = cameraAngleLimits.x;
+        if (cameraAngle < cameraAngleLimits.y) cameraAngle = cameraAngleLimits.y;
         if (cameraRotation >= 360)
             cameraRotation -= 360;
         if (cameraRotation < 0)
@@ -126,6 +117,10 @@ public class PlayerController : MonoBehaviour {
     }
     
     public void CheckInputs() {
+        if(inputs.SwapPressed()) {
+            GameManager.SwapCharacters();
+            return;
+        }
         if (character == null) return;
         Vector2 movement = inputs.GetMovementAxis();
         float forWalk = movement.y;

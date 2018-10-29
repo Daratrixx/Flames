@@ -21,7 +21,7 @@ public class Character : MonoBehaviour {
 
     public const float gravitySpeed = 20;
     public const float gravityOffset = 0.05f;
-    public const int obstaclesCollisionLayer = 1 << 10;
+    public const int obstaclesCollisionLayer = (1 << 10) + (1 << 11);
     public const float jumpGravityFactor = 0.40f;
     public const float jumpVelocity = 5;
     public Vector3 velocity;
@@ -192,7 +192,7 @@ public class Character : MonoBehaviour {
         float gravityEffect = velocity.y * Time.deltaTime;
         RaycastHit hitInfo;
         if (gravityEffect < 0) {
-            if (Physics.Raycast(transform.position + Vector3.up, -Vector3.up, out hitInfo, -gravityEffect + 1 + gravityOffset, obstaclesCollisionLayer)) {
+            if (Physics.Raycast(transform.position + Vector3.up*0.5f, -Vector3.up, out hitInfo, -gravityEffect + 0.5f + gravityOffset, obstaclesCollisionLayer)) {
                 transform.position = hitInfo.point + Vector3.up * gravityOffset;
                 velocity.y = 0;
                 if (isFalling) {
@@ -207,7 +207,7 @@ public class Character : MonoBehaviour {
                 if (isGrounded) isGrounded = false;
             }
         } else if (gravityEffect > 0) {
-            if (Physics.Raycast(transform.position, Vector3.up, out hitInfo, gravityEffect + 1 + gravityOffset, obstaclesCollisionLayer)) {
+            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.up, out hitInfo, gravityEffect + -0.5f + gravityOffset, obstaclesCollisionLayer)) {
                 transform.position = hitInfo.point - Vector3.up * gravityOffset;
                 velocity.y = 0;
                 if (isJumping) isJumping = false;
