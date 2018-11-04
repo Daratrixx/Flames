@@ -12,6 +12,7 @@ public class Character : MonoBehaviour {
     public PlayerController controller;
     public AudioSource audioSource;
     public Collider characterCollider;
+    public Collider characterFeet;
 
     public float rotationSpeed = 7.5f;
     public float walkSpeed = 3;
@@ -38,18 +39,7 @@ public class Character : MonoBehaviour {
     }
 
     void Start() {
-        if (audioSource == null)
-            audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-        if (animatorController == null)
-            animatorController = GetComponent<Animator>();
-        if (animatorController == null)
-            animatorController = gameObject.AddComponent<Animator>();
-        if (controller == null)
-            controller = GetComponent<PlayerController>();
-        if (controller == null)
-            controller = gameObject.AddComponent<PlayerController>();
+        PrepareAnimationHelpers();
         characters.Add(this);
     }
 
@@ -75,7 +65,8 @@ public class Character : MonoBehaviour {
             if (!isMoving || isRunning) {
                 isRunning = false;
                 isMoving = true;
-                CrossFadeAnimation("MoveForward", 0.3f);
+                //CrossFadeAnimation("MoveForward", 0.3f);
+                PlayAnimation(walkAnimation);
             }
         }
         transform.position += direction * walkSpeed * Time.deltaTime;
@@ -88,7 +79,8 @@ public class Character : MonoBehaviour {
         if (isGrounded) {
             if (!isMoving) {
                 isMoving = true;
-                CrossFadeAnimation("MoveForward", 0.3f);
+                //CrossFadeAnimation("MoveForward", 0.3f);
+                PlayAnimation(walkAnimation);
             }
         }
         transform.position += transform.rotation * movement * walkSpeed * Time.deltaTime;
@@ -102,7 +94,8 @@ public class Character : MonoBehaviour {
             if (!isMoving || !isRunning) {
                 isRunning = true;
                 isMoving = true;
-                CrossFadeAnimation("MoveForward", 0.3f);
+                //CrossFadeAnimation("MoveForward", 0.3f);
+                PlayAnimation(walkAnimation);
             }
         }
         transform.position += direction * runSpeed * Time.deltaTime;
@@ -120,8 +113,9 @@ public class Character : MonoBehaviour {
             isJumping = true;
             velocity.y = jumpVelocity;
             gravityFactor = jumpGravityFactor;
-            CrossFadeAnimation("Jumping", 0.3f);
+            //CrossFadeAnimation("Jumping", 0.3f);
             //CrossFadeAnimation("Stand", 0.3f);
+            PlayAnimation(jumpAnimation);
         }
     }
     public void Rotate(Vector3 direction) {
@@ -135,7 +129,8 @@ public class Character : MonoBehaviour {
             if (isMoving) {
                 isMoving = false;
                 isRunning = false;
-                BackToStandAnimation();
+                //BackToStandAnimation();
+                PlayAnimation(standAnimation);
             }
         }
         //movement = Vector3.zero;
@@ -148,9 +143,19 @@ public class Character : MonoBehaviour {
         animatorController.Play(animationName, -1, 0);
         elapsedAnimationTime = 0;
     }
+    private void StartAnimation(int animationHash) {
+        //animatorController.CrossFade(animationName, 0.1f);
+        animatorController.Play(animationHash, -1, 0);
+        elapsedAnimationTime = 0;
+    }
 
     private void CrossFadeAnimation(string animationName, float transitionDuration) {
         animatorController.CrossFade(animationName, transitionDuration);
+        elapsedAnimationTime = 0;
+    }
+
+    private void CrossFadeAnimation(int animationHash, float transitionDuration) {
+        animatorController.CrossFade(animationHash, transitionDuration);
         elapsedAnimationTime = 0;
     }
 
@@ -185,14 +190,15 @@ public class Character : MonoBehaviour {
         if (!isFalling && velocity.y < 0) {
             isFalling = true;
             gravityFactor = 1;
-            CrossFadeAnimation("Falling", 0.3f);
+            //CrossFadeAnimation("Falling", 0.3f);
+            PlayAnimation(fallAnimation);
         }
         float acceleration = Time.deltaTime * gravitySpeed * gravityFactor;
         velocity.y -= acceleration;
         float gravityEffect = velocity.y * Time.deltaTime;
         RaycastHit hitInfo;
         if (gravityEffect < 0) {
-            if (Physics.Raycast(transform.position + Vector3.up*0.5f, -Vector3.up, out hitInfo, -gravityEffect + 0.5f + gravityOffset, obstaclesCollisionLayer)) {
+            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, -Vector3.up, out hitInfo, -gravityEffect + 0.5f + gravityOffset, obstaclesCollisionLayer)) {
                 transform.position = hitInfo.point + Vector3.up * gravityOffset;
                 velocity.y = 0;
                 if (isFalling) {
@@ -200,7 +206,8 @@ public class Character : MonoBehaviour {
                 }
                 if (!isGrounded) {
                     isGrounded = true;
-                    BackToStandAnimation();
+                    //BackToStandAnimation();
+                    PlayAnimation(standAnimation);
                 }
             } else {
                 transform.position += Vector3.up * gravityEffect;
@@ -253,9 +260,7 @@ public class Character : MonoBehaviour {
     void FixedUpdate() {
         elapsedAnimationTime += Time.fixedDeltaTime;
     }
-
-
-
+    
 
     private void CharacterHitObstacle(RaycastHit rh) {
         Vector3 center = characterCollider.transform.position;
@@ -275,6 +280,21 @@ public class Character : MonoBehaviour {
             }
         }
 
+    }
+
+    public static Vector3 feetBoxPosition = new Vector3(0, 0.05f, -0.1f);
+    public static Vector3 feetBoxSize = new Vector3(0.5f, 0.1f, 0.8f) / 2;
+
+    // Feet collider must be not null!
+    public bool GravityWithFeet(float gravityEffect) {
+        if (!Physics.BoxCast(transform.position + transform.rotation * Vector3.Scale(feetBoxPosition, transform.lossyScale),
+            Vector3.Scale(feetBoxSize, transform.lossyScale), Vector3.down,
+            transform.rotation, gravityEffect, obstaclesCollisionLayer)) {
+            transform.position += Vector3.up * gravityEffect;
+            if (isGrounded) isGrounded = false;
+            return true;
+        }
+        return false;
     }
 
     public static RaycastHit[] CastColliderAll(Collider c, Vector3 direction) {
@@ -302,5 +322,54 @@ public class Character : MonoBehaviour {
         return hits;
     }
 
+
+    public void PrepareAnimationHelpers() {
+        standAnimation.PrepareHelper();
+        walkAnimation.PrepareHelper();
+        runAnimation.PrepareHelper();
+        jumpAnimation.PrepareHelper();
+        fallAnimation.PrepareHelper();
+    }
+
+    public CharacterAnimationHelper standAnimation = new CharacterAnimationHelper() {animationName = "Stand" };
+    public CharacterAnimationHelper walkAnimation = new CharacterAnimationHelper() { animationName = "MoveForward" };
+    public CharacterAnimationHelper runAnimation = new CharacterAnimationHelper() { animationName = "MoveForward" };
+    public CharacterAnimationHelper jumpAnimation = new CharacterAnimationHelper() { animationName = "Jumping", crossfadeDuration = 0.5f };
+    public CharacterAnimationHelper fallAnimation = new CharacterAnimationHelper() { animationName = "Falling", crossfadeDuration = 2 };
+
+    private CharacterAnimationHelper currentAnimation = null;
+
+    public bool IsAnimationPlaying(CharacterAnimationHelper animationHelper) {
+        return currentAnimation == animationHelper;
+    }
+
+    public bool PlayAnimation(CharacterAnimationHelper animationHelper) {
+        if(currentAnimation != animationHelper) {
+            currentAnimation = animationHelper;
+            if(currentAnimation != null) {
+                CrossFadeAnimation(animationHelper.animationId, animationHelper.crossfadeDuration);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
+[Serializable]
+public class CharacterAnimationHelper {
+
+    public string animationName;
+    public float crossfadeDuration = 0.3f;
+
+
+
+    private int ANIMATION_ID = -1;
+    public int animationId {
+        get { return ANIMATION_ID; }
+    }
+
+    public void PrepareHelper() {
+        ANIMATION_ID = Animator.StringToHash(animationName);
+    }
+}
