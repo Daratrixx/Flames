@@ -1,21 +1,17 @@
 fileFormatVersion: 2
-guid: 29ac282afa2d6524399d3dab7d3cc1a2
+guid: 2768253871de74f4caa3244c9de039b0
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Cube
     400000: //RootNode
-    400002: Cube
-    2100000: Material
+    2100000: unnamed
     2300000: //RootNode
-    2300002: Cube
     3300000: //RootNode
-    3300002: Cube
-    4300000: Cube
-    6400000: Cube
+    4300000: Cylinder
     7400000: Default Take
     9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -49,7 +45,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -89,7 +85,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
