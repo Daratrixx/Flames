@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
 
     private void SwapCharacter() {
         if (characters.Length > 0) {
+            characters[currentCharacterIndex].character.NoMove();
             characters[currentCharacterIndex].enabled = false;
             currentCharacterIndex = (currentCharacterIndex + 1) % characters.Length;
             characters[currentCharacterIndex].enabled = true;
