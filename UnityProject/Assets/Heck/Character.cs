@@ -95,7 +95,7 @@ public class Character : MonoBehaviour {
                 isRunning = true;
                 isMoving = true;
                 //CrossFadeAnimation("MoveForward", 0.3f);
-                PlayAnimation(walkAnimation);
+                PlayAnimation(runAnimation);
             }
         }
         transform.position += direction * runSpeed * Time.deltaTime;
@@ -186,9 +186,12 @@ public class Character : MonoBehaviour {
         // detect end of jump upward movement
         if (isJumping && velocity.y <= 0) {
             isJumping = false;
+            if (isFalling) isFalling = false; // make sure the transition to fall animation occurs
         }
         if (!isFalling && velocity.y < 0) {
             isFalling = true;
+            if (isMoving) isMoving = false;
+            if (isRunning) isRunning = false;
             gravityFactor = 1;
             //CrossFadeAnimation("Falling", 0.3f);
             PlayAnimation(fallAnimation);
@@ -333,7 +336,7 @@ public class Character : MonoBehaviour {
 
     public CharacterAnimationHelper standAnimation = new CharacterAnimationHelper() {animationName = "Stand" };
     public CharacterAnimationHelper walkAnimation = new CharacterAnimationHelper() { animationName = "MoveForward" };
-    public CharacterAnimationHelper runAnimation = new CharacterAnimationHelper() { animationName = "MoveForward" };
+    public CharacterAnimationHelper runAnimation = new CharacterAnimationHelper() { animationName = "Running" };
     public CharacterAnimationHelper jumpAnimation = new CharacterAnimationHelper() { animationName = "Jumping", crossfadeDuration = 0.5f };
     public CharacterAnimationHelper fallAnimation = new CharacterAnimationHelper() { animationName = "Falling", crossfadeDuration = 2 };
 

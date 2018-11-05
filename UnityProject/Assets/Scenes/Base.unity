@@ -615,7 +615,7 @@ MonoBehaviour:
     animationName: MoveForward
     crossfadeDuration: 0.3
   runAnimation:
-    animationName: MoveForward
+    animationName: Running
     crossfadeDuration: 0.3
   jumpAnimation:
     animationName: Jumping
@@ -5533,8 +5533,8 @@ MonoBehaviour:
   characterCollider: {fileID: 199588874}
   characterFeet: {fileID: 0}
   rotationSpeed: 7.5
-  walkSpeed: 5
-  runSpeed: 10
+  walkSpeed: 2
+  runSpeed: 8
   velocity: {x: 0, y: 0, z: 0}
   movement: {x: 0, y: 0, z: 0}
   isMoving: 0
@@ -5547,10 +5547,10 @@ MonoBehaviour:
     crossfadeDuration: 0.3
   walkAnimation:
     animationName: MoveForward
-    crossfadeDuration: 0.3
+    crossfadeDuration: 0.2
   runAnimation:
-    animationName: MoveForward
-    crossfadeDuration: 0.3
+    animationName: Running
+    crossfadeDuration: 0.1
   jumpAnimation:
     animationName: Jumping
     crossfadeDuration: 0.5
@@ -7840,8 +7840,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.049690247, y: -0.0023069382, z: -0.25190353}
-    m_Extent: {x: 0.5204819, y: 0.98748004, z: 1.1122909}
+    m_Center: {x: -0.049690247, y: -0.002306223, z: -0.25189972}
+    m_Extent: {x: 0.5204819, y: 0.9872777, z: 1.112116}
   m_DirtyAABB: 0
 --- !u!183 &762285299
 Cloth:
@@ -15342,7 +15342,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0, g: 0.97232723, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 46.39968
   m_CookieSize: 10
@@ -15364,7 +15364,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -16140,8 +16140,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.0000076293945, y: -0.22223568, z: -0.050257683}
-    m_Extent: {x: 0.7036903, y: 0.71616095, z: 0.8002639}
+    m_Center: {x: -0.0000038146973, y: -0.22223568, z: -0.05025673}
+    m_Extent: {x: 0.70364094, y: 0.7160368, z: 0.8001344}
   m_DirtyAABB: 0
 --- !u!1 &1896037826 stripped
 GameObject:
