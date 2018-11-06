@@ -44,6 +44,7 @@ public class PlayerInput : ScriptableObject {
     public bool JumpPressed() { return Input.GetKeyDown(jump); }
 
     public bool SwapPressed() { return Input.GetKeyDown(swap); }
+    public bool ShootPressed() { return Input.GetKeyDown(shoot); }
 
     public KeyCode forward = KeyCode.Z;
     public KeyCode leftward = KeyCode.Q;
@@ -66,6 +67,7 @@ public class PlayerInput : ScriptableObject {
     public KeyCode lockOn = KeyCode.Mouse2;
 
     public KeyCode swap = KeyCode.Tab;
+    public KeyCode shoot = KeyCode.E;
 
     public void SetLayoutZQSD() {
         forward = KeyCode.Z;

@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
 
     public bool gameCursor = false;
 
+    public GameObject missilePrefab = null;
+
     private void Start() {
         if (!Application.isEditor) {
             Cursor.lockState = CursorLockMode.Locked;
@@ -125,6 +127,9 @@ public class PlayerController : MonoBehaviour {
         Vector2 movement = inputs.GetMovementAxis();
         float forWalk = movement.y;
         float sideWalk = movement.x;
+        if(inputs.ShootPressed() && missilePrefab != null) {
+            GameObject.Instantiate(missilePrefab, cameraAnchor, playerCamera.transform.rotation);
+        }
         if (movement.magnitude > 0.001f) {
             Vector3 direction = playerCamera.transform.forward * forWalk + playerCamera.transform.right * sideWalk;
             direction.y = 0;
