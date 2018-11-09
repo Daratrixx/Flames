@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Character : MonoBehaviour {
+public class Character : Animatable {
 
     public static List<Character> characters = new List<Character>();
-
-    public Animator animatorController;
+    
     public PlayerController controller;
     public AudioSource audioSource;
     public Collider characterCollider;
@@ -17,8 +16,6 @@ public class Character : MonoBehaviour {
     public float rotationSpeed = 7.5f;
     public float walkSpeed = 3;
     public float runSpeed = 6;
-
-    private float elapsedAnimationTime;
 
     public const float gravitySpeed = 20;
     public const float gravityOffset = 0.05f;
@@ -137,27 +134,6 @@ public class Character : MonoBehaviour {
     }
 
     #region ANIMATION_CONTROLLS
-
-    private void StartAnimation(string animationName) {
-        //animatorController.CrossFade(animationName, 0.1f);
-        animatorController.Play(animationName, -1, 0);
-        elapsedAnimationTime = 0;
-    }
-    private void StartAnimation(int animationHash) {
-        //animatorController.CrossFade(animationName, 0.1f);
-        animatorController.Play(animationHash, -1, 0);
-        elapsedAnimationTime = 0;
-    }
-
-    private void CrossFadeAnimation(string animationName, float transitionDuration) {
-        animatorController.CrossFade(animationName, transitionDuration);
-        elapsedAnimationTime = 0;
-    }
-
-    private void CrossFadeAnimation(int animationHash, float transitionDuration) {
-        animatorController.CrossFade(animationHash, transitionDuration);
-        elapsedAnimationTime = 0;
-    }
 
     private void BackToStandAnimation() {
         StartAnimation("Stand");
@@ -326,7 +302,7 @@ public class Character : MonoBehaviour {
     }
 
 
-    public void PrepareAnimationHelpers() {
+    public override void PrepareAnimationHelpers() {
         standAnimation.PrepareHelper();
         walkAnimation.PrepareHelper();
         runAnimation.PrepareHelper();
@@ -334,45 +310,10 @@ public class Character : MonoBehaviour {
         fallAnimation.PrepareHelper();
     }
 
-    public CharacterAnimationHelper standAnimation = new CharacterAnimationHelper() {animationName = "Stand" };
-    public CharacterAnimationHelper walkAnimation = new CharacterAnimationHelper() { animationName = "MoveForward" };
-    public CharacterAnimationHelper runAnimation = new CharacterAnimationHelper() { animationName = "Running" };
-    public CharacterAnimationHelper jumpAnimation = new CharacterAnimationHelper() { animationName = "Jumping", crossfadeDuration = 0.5f };
-    public CharacterAnimationHelper fallAnimation = new CharacterAnimationHelper() { animationName = "Falling", crossfadeDuration = 2 };
+    public AnimationHelper standAnimation = new AnimationHelper() {animationName = "Stand", crossfadeDuration = 0.3f };
+    public AnimationHelper walkAnimation = new AnimationHelper() { animationName = "MoveForward", crossfadeDuration = 0.3f };
+    public AnimationHelper runAnimation = new AnimationHelper() { animationName = "Running", crossfadeDuration = 0.3f };
+    public AnimationHelper jumpAnimation = new AnimationHelper() { animationName = "Jumping", crossfadeDuration = 0.5f };
+    public AnimationHelper fallAnimation = new AnimationHelper() { animationName = "Falling", crossfadeDuration = 2 };
 
-    private CharacterAnimationHelper currentAnimation = null;
-
-    public bool IsAnimationPlaying(CharacterAnimationHelper animationHelper) {
-        return currentAnimation == animationHelper;
-    }
-
-    public bool PlayAnimation(CharacterAnimationHelper animationHelper) {
-        if(currentAnimation != animationHelper) {
-            currentAnimation = animationHelper;
-            if(currentAnimation != null) {
-                CrossFadeAnimation(animationHelper.animationId, animationHelper.crossfadeDuration);
-                return true;
-            }
-        }
-        return false;
-    }
-
-}
-
-[Serializable]
-public class CharacterAnimationHelper {
-
-    public string animationName;
-    public float crossfadeDuration = 0.3f;
-
-
-
-    private int ANIMATION_ID = -1;
-    public int animationId {
-        get { return ANIMATION_ID; }
-    }
-
-    public void PrepareHelper() {
-        ANIMATION_ID = Animator.StringToHash(animationName);
-    }
 }

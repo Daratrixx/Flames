@@ -5,13 +5,13 @@ using UnityEngine;
 namespace Assets.Scripts {
 
     
-    public class TriggerEffectOpenDoor : TriggerEffect {
+    public class TriggerEffectCloseDoor : TriggerEffect {
 
         public DoorController door;
 
         public override void EffectOnTrigger() {
-            door.Open();
-            Debug.Log("A door has been opened");
+            door.Close();
+            Debug.Log("A door has been closed");
         }
 
     }
