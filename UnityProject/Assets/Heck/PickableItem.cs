@@ -6,14 +6,26 @@ using UnityEngine;
 namespace Assets.Scripts {
     public class PickableItem : MonoBehaviour {
 
+        public ItemData item = null;
+
+        private void Start() {
+            if(item != null) {
+                GetComponentInChildren<MeshFilter>().mesh = item.itemHolderMesh; // renderer
+                GetComponentInChildren<MeshRenderer>().material = item.itemHolderMaterial; // renderer
+            }
+        }
+
         private void OnTriggerEnter(Collider other) {
             Character character;
             if ((character = other.GetComponent<Character>()) != null) {
+                // add the item to the inventory
+                Debug.Log("The item has been add to the character inventory");
+                // shrink and remove the item
                 StartCoroutine(DestroyItem());
             }
         }
 
-        public const float itemDestroyDuration = 1;
+        public const float itemDestroyDuration = 2;
 
         private IEnumerator DestroyItem() {
             ParticleSystem ps;
