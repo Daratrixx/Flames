@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: be84d3b4ec52e744f808e7f0e7039211
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Cube
+    100002: Cube_001
+    100004: Cube_002
+    100006: Cube_003
+    100008: //RootNode
+    100010: Plane
+    100012: LowerFrame
+    100014: PlatterWall
+    100016: StoneFloor
+    100018: UpperFrame
+    100020: WoodenFoundation
+    100022: WoodenFloor
+    100024: LowerPlatterWall
+    100026: UpperFrame_001
+    100028: UpperPlatterWall
+    400000: Cube
+    400002: Cube_001
+    400004: Cube_002
+    400006: Cube_003
+    400008: //RootNode
+    400010: Plane
+    400012: LowerFrame
+    400014: PlatterWall
+    400016: StoneFloor
+    400018: UpperFrame
+    400020: WoodenFoundation
+    400022: WoodenFloor
+    400024: LowerPlatterWall
+    400026: UpperFrame_001
+    400028: UpperPlatterWall
+    2100000: None__Platter
+    2100002: None__Stone
+    2100004: None__Wood
+    2100006: unnamed
+    2300000: Cube
+    2300002: Cube_001
+    2300004: Cube_002
+    2300006: Cube_003
+    2300008: Plane
+    2300010: LowerFrame
+    2300012: PlatterWall
+    2300014: StoneFloor
+    2300016: UpperFrame
+    2300018: WoodenFoundation
+    2300020: WoodenFloor
+    2300022: LowerPlatterWall
+    2300024: UpperFrame_001
+    2300026: UpperPlatterWall
+    3300000: Cube
+    3300002: Cube_001
+    3300004: Cube_002
+    3300006: Cube_003
+    3300008: Plane
+    3300010: LowerFrame
+    3300012: PlatterWall
+    3300014: StoneFloor
+    3300016: UpperFrame
+    3300018: WoodenFoundation
+    3300020: WoodenFloor
+    3300022: LowerPlatterWall
+    3300024: UpperFrame_001
+    3300026: UpperPlatterWall
+    4300000: Plane
+    4300002: Cube_003
+    4300004: Cube_001
+    4300006: Cube_002
+    4300008: Cube
+    4300010: PlatterWall
+    4300012: StoneFloor
+    4300014: LowerFrame
+    4300016: UpperFrame
+    4300018: WoodenFoundation
+    4300020: WoodenFloor
+    4300022: UpperPlatterWall
+    4300024: UpperFrame_001
+    4300026: LowerPlatterWall
+    6400000: Cube
+    6400002: Cube_001
+    6400004: Cube_002
+    6400006: Cube_003
+    6400008: Plane
+    6400010: LowerFrame
+    6400012: PlatterWall
+    6400014: StoneFloor
+    6400016: UpperFrame
+    6400018: WoodenFoundation
+    6400020: WoodenFloor
+    6400022: LowerPlatterWall
+    6400024: UpperFrame_001
+    6400026: UpperPlatterWall
+    7400000: Default Take
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__Platter
+    second: {fileID: 2100000, guid: ed92e9cab7f322c40b650e871442524e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__Stone
+    second: {fileID: 2100000, guid: cd3f7b69ca05e144fa533debf3f8daf4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__Wood
+    second: {fileID: 2100000, guid: 01a8ec17a0294b34884a97c36029183a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
