@@ -133,8 +133,12 @@ public class Character : Animatable {
         //movement = Vector3.zero;
     }
     public void Die() {
-        NoMove();
+        Destroy(characterCollider);
+        Destroy(GetComponent<Rigidbody>());
+        RagDollAfterAnimation(deathAnimation);
+        //Destroy(this);
     }
+
     #region ANIMATION_CONTROLLS
 
     private void BackToStandAnimation() {
@@ -152,6 +156,7 @@ public class Character : Animatable {
     public void ApplyForce(Vector3 force) {
         transform.position += force;
     }
+
     public void ApplyDisplacement(Vector3 displacement) {
         transform.position += right * displacement.x +
             up * displacement.y +
@@ -161,6 +166,7 @@ public class Character : Animatable {
     #endregion
 
     void Update() {
+        if (IsAnimationPlaying(deathAnimation)) return;
         // detect end of jump upward movement
         if (isJumping && velocity.y <= 0) {
             isJumping = false;
@@ -310,6 +316,7 @@ public class Character : Animatable {
         runAnimation.PrepareHelper();
         jumpAnimation.PrepareHelper();
         fallAnimation.PrepareHelper();
+        deathAnimation.PrepareHelper();
     }
 
     public AnimationHelper standAnimation = new AnimationHelper() {animationName = "Stand", crossfadeDuration = 0.3f };
@@ -317,5 +324,6 @@ public class Character : Animatable {
     public AnimationHelper runAnimation = new AnimationHelper() { animationName = "Running", crossfadeDuration = 0.3f };
     public AnimationHelper jumpAnimation = new AnimationHelper() { animationName = "Jumping", crossfadeDuration = 0.5f };
     public AnimationHelper fallAnimation = new AnimationHelper() { animationName = "Falling", crossfadeDuration = 2 };
+    public AnimationHelper deathAnimation = new AnimationHelper() { animationName = "Death", crossfadeDuration = 0.3f };
 
 }

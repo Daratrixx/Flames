@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class Animatable : MonoBehaviour {
 
     public Animator animatorController;
+    public Transform armatureRootBone;
 
     protected float elapsedAnimationTime;
 
@@ -50,6 +51,51 @@ public abstract class Animatable : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    protected void RagdollOn(Transform t) {
+        Rigidbody rb = t.gameObject.AddComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezePosition;
+        rb.useGravity = true;
+        rb.drag = 1;
+        rb.angularDrag = 1;
+        rb.maxAngularVelocity = 5;
+        CapsuleCollider bc = t.gameObject.AddComponent<CapsuleCollider>();
+        bc.radius = 0.1f;
+        bc.height = 0.2f;
+        bc.direction = 2;
+        //bc.size = new Vector3(0.1f, 0.1f, 0.2f);
+        bc.center = new Vector3(0, 0, 0.10f);
+        for (int i = 0; i < t.childCount; ++i) {
+            RagdollOn(t.GetChild(i));
+        }
+    }
+
+    protected void RagdollOff(Transform t) {
+        Destroy(t.gameObject.GetComponent<Rigidbody>());
+        Destroy(t.gameObject.GetComponent<BoxCollider>());
+        for (int i = 0; i < t.childCount; ++i) {
+            RagdollOff(t.GetChild(i));
+        }
+    }
+
+    public void TurnRagDollOn() {
+        RagdollOn(armatureRootBone);
+    }
+
+    public void TurnRagDollOff() {
+        RagdollOff(armatureRootBone);
+    }
+
+    public void RagDollAfterAnimation(AnimationHelper animation) {
+        PlayAnimation(animation);
+        var anim = animatorController.GetCurrentAnimatorStateInfo(0);
+        StartCoroutine(TurnRagDollOnAfterDelay(anim.length * anim.speedMultiplier));
+    }
+
+    protected IEnumerator TurnRagDollOnAfterDelay(float delay) {
+        yield return new WaitForSeconds(delay);
+        TurnRagDollOn();
     }
 
 }

@@ -31,19 +31,23 @@ public class AIController : MonoBehaviour {
     protected bool isFollowing = false;
     protected bool isRoaming = true;
 
+    protected IEnumerator targetUpdateCoroutine;
+
     private void Start() {
         RaycastHit info;
         if (Physics.Raycast(character.transform.position, Vector3.down, out info, 10, 1 << 10))
             character.transform.position = info.point;
         originalPosition = character.transform.position;
 
-        StartCoroutine(TargetUpdateCoroutine());
+        StartCoroutine(targetUpdateCoroutine = TargetUpdate());
     }
 
     private void Update() {
         if (unit == null) return;
         if (unit.IsDead()) {
             character.Die();
+            character = null;
+            Destroy(unit);
             unit = null;
             Destroy(this);
             return;
@@ -124,7 +128,7 @@ public class AIController : MonoBehaviour {
     #region target
 
     public int targetUpdateInterval = 25; // count of FixedUpdate call between each target check
-    public IEnumerator TargetUpdateCoroutine() {
+    public IEnumerator TargetUpdate() {
         while (true) {
             for (int i = 0; i < targetUpdateInterval; ++i)
                 yield return new WaitForFixedUpdate();

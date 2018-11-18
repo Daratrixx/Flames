@@ -191,7 +191,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: d0992714e2d037d499d42e34d6567f37, type: 2}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4589,6 +4589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 793267245}
+  armatureRootBone: {fileID: 0}
   closedAnimation:
     animationName: Closed
     crossfadeDuration: 0
@@ -5304,6 +5305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 1176919799}
+  armatureRootBone: {fileID: 238648932}
   controller: {fileID: 0}
   audioSource: {fileID: 1730133293}
   characterCollider: {fileID: 2080880547}
@@ -5333,6 +5335,9 @@ MonoBehaviour:
   fallAnimation:
     animationName: Falling
     crossfadeDuration: 2
+  deathAnimation:
+    animationName: Death
+    crossfadeDuration: 0.3
 --- !u!65 &2080880547
 BoxCollider:
   m_ObjectHideFlags: 0
