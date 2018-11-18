@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: missile
+  m_Name: missile-player-particle
   m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 4
@@ -75,4 +75,4 @@ Material:
     m_Colors:
     - _Color: {r: 0, g: 0.9073797, b: 1, a: 1}
     - _EmissionColor: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}
-    - _TintColor: {r: 0, g: 0.90588236, b: 1, a: 0.78431374}
+    - _TintColor: {r: 0, g: 0.78431374, b: 1, a: 0.78431374}

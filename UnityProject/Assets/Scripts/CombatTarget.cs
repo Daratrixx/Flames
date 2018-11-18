@@ -7,7 +7,7 @@ using System;
 
 namespace Assets.Scripts {
 
-    public abstract class CombatAttackable : MonoBehaviour {
+    public abstract class CombatTarget : MonoBehaviour {
 
         public abstract CombatTeam GetTeam();
 

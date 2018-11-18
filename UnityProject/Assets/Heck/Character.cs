@@ -132,7 +132,9 @@ public class Character : Animatable {
         }
         //movement = Vector3.zero;
     }
-
+    public void Die() {
+        NoMove();
+    }
     #region ANIMATION_CONTROLLS
 
     private void BackToStandAnimation() {

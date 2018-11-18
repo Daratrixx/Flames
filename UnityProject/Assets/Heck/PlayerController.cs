@@ -149,4 +149,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void OnCharacterDeath() {
+            GameManager.RemoveCharacterController(this);
+    }
+
 }

@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4052394414480152}
   - component: {fileID: 135307707915216122}
+  - component: {fileID: 114026963771382746}
   m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
@@ -588,6 +589,7 @@ GameObject:
   - component: {fileID: 65330066649160888}
   - component: {fileID: 136968273366764712}
   - component: {fileID: 54893011140756846}
+  - component: {fileID: 114544914042932602}
   m_Layer: 11
   m_Name: Character (Night)
   m_TagString: Untagged
@@ -772,6 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4058012989933756}
   - component: {fileID: 135733080139688408}
+  - component: {fileID: 114621243283402520}
   m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
@@ -854,6 +857,7 @@ GameObject:
   - component: {fileID: 65671587510341794}
   - component: {fileID: 136725115489484382}
   - component: {fileID: 54668400387598716}
+  - component: {fileID: 114251729133426256}
   m_Layer: 11
   m_Name: Character (Kindled)
   m_TagString: Untagged
@@ -1485,7 +1489,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1671721816904042}
   m_LocalRotation: {x: -0, y: 0.5379618, z: -0, w: 0.84296924}
-  m_LocalPosition: {x: -2.6005163, y: 2.822045, z: -11.28952}
+  m_LocalPosition: {x: 0.22000027, y: 1.18, z: -0.8599987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4073022650551028}
@@ -1600,7 +1604,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922850265258984}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -3.4505167, y: 2.822045, z: -7.4295216}
+  m_LocalPosition: {x: -0.63, y: 1.18, z: 3}
   m_LocalScale: {x: 0.90000093, y: 0.9, z: 0.90000093}
   m_Children:
   - {fileID: 4467855280991102}
@@ -2054,6 +2058,18 @@ MonoBehaviour:
   fallAnimation:
     animationName: Falling
     crossfadeDuration: 2
+--- !u!114 &114026963771382746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014475219218196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbf1c7aa058c014dacf640c7963a3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootUnit: {fileID: 114251729133426256}
 --- !u!114 &114055205752203912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2076,6 +2092,8 @@ MonoBehaviour:
   cameraFollowSpeed: 5
   cameraCollisionOffset: 0.5
   gameCursor: 0
+  missilePrefab: {fileID: 1368012387175306, guid: c040c6c807e795f4ea976a73d77d8fb3,
+    type: 2}
 --- !u!114 &114154543108616064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2098,6 +2116,22 @@ MonoBehaviour:
   cameraFollowSpeed: 5
   cameraCollisionOffset: 0.5
   gameCursor: 0
+  missilePrefab: {fileID: 1775704876666738, guid: 1f44ad954c6d98c45b75a0843a3765d7,
+    type: 2}
+--- !u!114 &114251729133426256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922850265258984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e629d1205ba09f349a6fe4111809239a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 4
+  currentHealth: 100
+  maxHealth: 100
 --- !u!114 &114362804033563754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2112,6 +2146,32 @@ MonoBehaviour:
   characters:
   - {fileID: 114154543108616064}
   - {fileID: 114055205752203912}
+--- !u!114 &114544914042932602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1671721816904042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e629d1205ba09f349a6fe4111809239a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 1
+  currentHealth: 100
+  maxHealth: 100
+--- !u!114 &114621243283402520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1846244535921742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbf1c7aa058c014dacf640c7963a3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootUnit: {fileID: 114544914042932602}
 --- !u!114 &114903336491990492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2315,8 +2375,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.04970169, y: -0.0023059845, z: -0.2518978}
-    m_Extent: {x: 0.52048135, y: 0.9872782, z: 1.1121159}
+    m_Center: {x: -0.04970312, y: -0.0023064613, z: -0.251899}
+    m_Extent: {x: 0.52048135, y: 0.9872776, z: 1.1121156}
   m_DirtyAABB: 0
 --- !u!137 &137882000993305510
 SkinnedMeshRenderer:
@@ -2430,8 +2490,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: 0, y: -0.22223473, z: -0.050255775}
-    m_Extent: {x: 0.7036412, y: 0.7160368, z: 0.8001348}
+    m_Center: {x: 0, y: -0.22223568, z: -0.05025649}
+    m_Extent: {x: 0.70364094, y: 0.7160368, z: 0.8001349}
   m_DirtyAABB: 0
 --- !u!183 &183542269121835526
 Cloth:

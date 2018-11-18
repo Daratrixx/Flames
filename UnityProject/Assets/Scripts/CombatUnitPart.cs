@@ -8,7 +8,7 @@ using System;
 namespace Assets.Scripts {
 
     [RequireComponent(typeof(Collider))]
-    public class CombatUnitPart : CombatAttackable {
+    public class CombatUnitPart : CombatTarget {
 
         public CombatUnit rootUnit = null;
 

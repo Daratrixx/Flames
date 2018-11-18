@@ -21,12 +21,12 @@ namespace Assets.Scripts {
         }
 
         private void OnTriggerEnter(Collider other) {
-            CombatAttackable unit;
+            CombatTarget unit;
             /*if (other.gameObject.layer == obstacleLayer) {
                 // we hit an obstacle, the missile is consumed
                 Destroy(gameObject);
             } else*/
-            if ((unit = other.GetComponent<CombatAttackable>()) != null) {
+            if ((unit = other.GetComponent<CombatTarget>()) != null) {
                 // we hit a unit, damage or heal accordingly and consume the missile
                 if (((int)affects & (int)unit.GetTeam()) == 0) return; // unit is not affected
                 if (heal > 0) unit.Heal(heal);

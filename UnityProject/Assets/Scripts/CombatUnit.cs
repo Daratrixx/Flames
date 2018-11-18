@@ -7,7 +7,7 @@ using System;
 
 namespace Assets.Scripts {
 
-    public class CombatUnit : CombatAttackable {
+    public class CombatUnit : CombatTarget {
 
         public CombatTeam team = CombatTeam.player;
 

@@ -58,7 +58,7 @@ LightmapSettings:
     serializedVersion: 10
     m_Resolution: 5
     m_BakeResolution: 10
-    m_AtlasSize: 1024
+    m_AtlasSize: 256
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -72,7 +72,7 @@ LightmapSettings:
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 0
     m_MixedBakeMode: 2
-    m_BakeBackend: 1
+    m_BakeBackend: 0
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 16
     m_PVRSampleCount: 128
@@ -191,6 +191,10 @@ Prefab:
     - target: {fileID: 400000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
@@ -475,6 +479,10 @@ Prefab:
     - target: {fileID: 400000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
@@ -838,6 +846,10 @@ Prefab:
     - target: {fileID: 400000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2de0d9618d53ae9499f54ed5b045382a, type: 3}
@@ -1215,6 +1227,15 @@ Prefab:
     - target: {fileID: 4974008720674116, guid: 5b301db1b0218de4caf260ac502ce2c0, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301538103350546, guid: 5b301db1b0218de4caf260ac502ce2c0, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 23058445320367370, guid: 5b301db1b0218de4caf260ac502ce2c0,
+        type: 2}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b301db1b0218de4caf260ac502ce2c0, type: 2}
@@ -5922,7 +5943,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4043189575310012, guid: 1456d885fca66714d9c084b263f82a8c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.592045
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4043189575310012, guid: 1456d885fca66714d9c084b263f82a8c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5958,6 +5979,41 @@ Prefab:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 534669904}
+    - target: {fileID: 137902594832158042, guid: 1456d885fca66714d9c084b263f82a8c,
+        type: 2}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 137902594832158042, guid: 1456d885fca66714d9c084b263f82a8c,
+        type: 2}
+      propertyPath: m_AABB.m_Center.y
+      value: -0.22223568
+      objectReference: {fileID: 0}
+    - target: {fileID: 137902594832158042, guid: 1456d885fca66714d9c084b263f82a8c,
+        type: 2}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.050254345
+      objectReference: {fileID: 0}
+    - target: {fileID: 137902594832158042, guid: 1456d885fca66714d9c084b263f82a8c,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.8001344
+      objectReference: {fileID: 0}
+    - target: {fileID: 137680609455902164, guid: 1456d885fca66714d9c084b263f82a8c,
+        type: 2}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.04970169
+      objectReference: {fileID: 0}
+    - target: {fileID: 137680609455902164, guid: 1456d885fca66714d9c084b263f82a8c,
+        type: 2}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.25189972
+      objectReference: {fileID: 0}
+    - target: {fileID: 137680609455902164, guid: 1456d885fca66714d9c084b263f82a8c,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.z
+      value: 1.1121148
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1456d885fca66714d9c084b263f82a8c, type: 2}
   m_IsPrefabAsset: 0
