@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Character : Animatable {
 
     public static List<Character> characters = new List<Character>();
@@ -125,10 +124,13 @@ public class Character : Animatable {
                 PlayAnimation(standAnimation);
             }
         }
+        inputs = Vector3.zero;
     }
     public void Die() {
-        Destroy(characterController);
-        RagDollAfterAnimation(deathAnimation);
+        //Destroy(characterController);
+        characterController.enabled = false;
+        RagDollOnAfterAnimation(deathAnimation);
+        inputs = Vector3.zero;
         //Destroy(this);
     }
 
@@ -162,9 +164,8 @@ public class Character : Animatable {
                 characterController.Move(Vector3.down * info.distance);
         }*/
 
-
         lastPosition = currentPosition;
-        inputs = Vector3.zero;
+        //inputs = Vector3.zero;
     }
 
     private void LateUpdate() {
@@ -175,7 +176,16 @@ public class Character : Animatable {
         elapsedAnimationTime += Time.fixedDeltaTime;
     }
 
-
+    void OnControllerColliderHit(ControllerColliderHit hit) {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body != null && !body.isKinematic) {
+            Vector3 velocity = lastPosition - transform.position;
+            velocity.x = 0;
+            velocity.z = 0;
+            body.position += inputs * Time.deltaTime; //velocity;
+            body.velocity += velocity;
+        }
+    }
 
     /*
         1-Inputs => create input movement vector
@@ -261,6 +271,7 @@ public void UpdateCharacterPosition() {
     }
 }
 */
+
     public override void PrepareAnimationHelpers() {
         standAnimation.PrepareHelper();
         walkAnimation.PrepareHelper();

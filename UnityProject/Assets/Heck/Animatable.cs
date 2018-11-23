@@ -55,17 +55,28 @@ public abstract class Animatable : MonoBehaviour {
 
     protected void RagdollOn(Transform t) {
         Rigidbody rb = t.gameObject.AddComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezePosition;
+        //rb.constraints = RigidbodyConstraints.FreezePosition;
         rb.useGravity = true;
         rb.drag = 1;
         rb.angularDrag = 1;
-        rb.maxAngularVelocity = 5;
+        rb.angularDrag = 1;
+        //rb.maxAngularVelocity = 5;
+        rb.mass = 1;
+        Rigidbody parentRb;
+        if ((parentRb = t.parent.GetComponent<Rigidbody>()) != null) {
+            HingeJoint j = t.gameObject.AddComponent<HingeJoint>();
+            j.autoConfigureConnectedAnchor = true;
+            j.connectedBody = parentRb;
+            //j.enableCollision = true;
+            //j.connectedAnchor = Vector3.Scale(t.localPosition, t.lossyScale);
+            j.axis = new Vector3(1, 1, 1);
+        }
+        if (t.GetComponent<Collider>() != null) return;
         CapsuleCollider bc = t.gameObject.AddComponent<CapsuleCollider>();
-        bc.radius = 0.1f;
-        bc.height = 0.2f;
-        bc.direction = 2;
-        //bc.size = new Vector3(0.1f, 0.1f, 0.2f);
-        bc.center = new Vector3(0, 0, 0.10f);
+        bc.radius = 0.15f;
+        bc.height = 0.6f;// Vector3.Scale(t.localPosition, t.lossyScale).magnitude;
+        bc.direction = 0;
+        bc.center = new Vector3(-bc.height / 2, 0, 0);
         for (int i = 0; i < t.childCount; ++i) {
             RagdollOn(t.GetChild(i));
         }
@@ -74,6 +85,7 @@ public abstract class Animatable : MonoBehaviour {
     protected void RagdollOff(Transform t) {
         Destroy(t.gameObject.GetComponent<Rigidbody>());
         Destroy(t.gameObject.GetComponent<BoxCollider>());
+        Destroy(t.gameObject.GetComponent<HingeJoint>());
         for (int i = 0; i < t.childCount; ++i) {
             RagdollOff(t.GetChild(i));
         }
@@ -87,15 +99,34 @@ public abstract class Animatable : MonoBehaviour {
         RagdollOff(armatureRootBone);
     }
 
-    public void RagDollAfterAnimation(AnimationHelper animation) {
-        PlayAnimation(animation);
-        var anim = animatorController.GetCurrentAnimatorStateInfo(0);
-        StartCoroutine(TurnRagDollOnAfterDelay(anim.length * anim.speedMultiplier));
+    public void RagDollOnAfterAnimation(AnimationHelper animation) {
+        //PlayAnimation(animation);
+        //var anim = animatorController.GetCurrentAnimatorStateInfo(0);
+        //StartCoroutine(TurnRagDollOnAfterDelay(anim.length * anim.speedMultiplier));
+        currentAnimation = animation;
+        animatorController.enabled = false;
+        StartCoroutine(TurnRagDollOnAfterDelay(0));
+    }
+
+    public void RagDollOffAfterAnimation(AnimationHelper animation) {
+        //PlayAnimation(animation);
+        //var anim = animatorController.GetCurrentAnimatorStateInfo(0);
+        //StartCoroutine(TurnRagDollOnAfterDelay(anim.length * anim.speedMultiplier));
+        currentAnimation = animation;
+        animatorController.enabled = true; ;
+        StartCoroutine(TurnRagDollOffAfterDelay(0));
     }
 
     protected IEnumerator TurnRagDollOnAfterDelay(float delay) {
-        yield return new WaitForSeconds(delay);
         TurnRagDollOn();
+        yield return new WaitForSeconds(delay);
+        //animatorController.StopPlayback();
+    }
+
+    protected IEnumerator TurnRagDollOffAfterDelay(float delay) {
+        TurnRagDollOff();
+        yield return new WaitForSeconds(delay);
+        //animatorController.StartPlayback();
     }
 
 }

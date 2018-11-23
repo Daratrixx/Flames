@@ -35,7 +35,7 @@ public class AIController : MonoBehaviour {
 
     private void Start() {
         RaycastHit info;
-        if (Physics.Raycast(character.transform.position, Vector3.down, out info, 10, 1 << 10))
+        if (Physics.Raycast(character.transform.position, Vector3.down, out info, 1, 1 << 10))
             character.transform.position = info.point;
         originalPosition = character.transform.position;
 
