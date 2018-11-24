@@ -7,6 +7,8 @@ public class Character : Animatable {
 
     public static List<Character> characters = new List<Character>();
 
+    [SerializeField]
+    public InventoryBase inventory= new InventoryBase();
     public CharacterController characterController;
     public AudioSource audioSource;
 

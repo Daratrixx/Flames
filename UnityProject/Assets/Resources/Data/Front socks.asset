@@ -13,3 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemHolderMesh: {fileID: 4300000, guid: e97f86948e41c0e479fe396e44efe16b, type: 3}
   itemHolderMaterial: {fileID: 2100000, guid: 222a123a60c13f840af7f64f2cb084b9, type: 2}
+  itemId: 2
+  itemName: Front socks
+  itemDescription: Some socks for you!
+  itemIcon: {fileID: 0}
+  equipmentSlot: 3

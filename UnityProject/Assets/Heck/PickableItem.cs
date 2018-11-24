@@ -7,7 +7,7 @@ namespace Assets.Scripts {
     public class PickableItem : MonoBehaviour {
 
         public ItemData item = null;
-
+        public int count = 1;
         private void Start() {
             if(item != null) {
                 GetComponentInChildren<MeshFilter>().mesh = item.itemHolderMesh; // renderer
@@ -19,7 +19,7 @@ namespace Assets.Scripts {
             Character character;
             if ((character = other.GetComponent<Character>()) != null) {
                 // add the item to the inventory
-                Debug.Log("The item has been add to the character inventory");
+                character.inventory.StoreItemIntoInventory(item, count);
                 // shrink and remove the item
                 StartCoroutine(DestroyItem());
             }

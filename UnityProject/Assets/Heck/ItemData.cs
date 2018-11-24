@@ -8,6 +8,12 @@ public class ItemData : ScriptableObject {
     public Mesh itemHolderMesh;
     public Material itemHolderMaterial;
 
+    public int itemId;
+
+    public string itemName;
+    public string itemDescription;
+    public Sprite itemIcon;
+
     public EquipmentSlot equipmentSlot;
 
     public Dictionary<BodyAttachmentPoint, GameObject> equipmentVisiblePart = new Dictionary<BodyAttachmentPoint, GameObject>();
