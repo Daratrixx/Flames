@@ -17,10 +17,10 @@ public class UIListElementInventory : UI.UIListElementBase<InventoryItem> {
 
     public override void UpdateView() {
         if (dataSource.item != null) {
-            itemName.text = dataSource.item.itemName;
-            itemDescription.text = dataSource.item.itemDescription;
-            itemCount.text = "x"+dataSource.count;
-            itemIcon.sprite = dataSource.item.itemIcon;
+            if(itemName.text != dataSource.item.itemName)itemName.text = dataSource.item.itemName;
+            if(itemDescription.text != dataSource.item.itemDescription) itemDescription.text = dataSource.item.itemDescription;
+            if(itemCount.text != "x" + dataSource.count)itemCount.text = "x"+dataSource.count;
+            if(itemIcon.sprite != dataSource.item.itemIcon) itemIcon.sprite = dataSource.item.itemIcon;
         } else {
             itemName.text = "No item";
             itemDescription.text = "Maybe this shouldn't be displayed?";

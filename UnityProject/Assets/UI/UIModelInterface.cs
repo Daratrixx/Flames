@@ -54,6 +54,15 @@ public abstract class UIModelList<T> : List<T>, UIModelInterface where T : UIMod
     public EmptyDelegate OnUpdate;
     public EmptyDelegate OnDelete;
 
+    public new void Add(T item) {
+        base.Add(item);
+        FireUpdate();
+    }
+    public new void Remove(T item) {
+        base.Remove(item);
+        FireUpdate();
+    }
+
     public void FireUpdate() {
         OnUpdate();
     }

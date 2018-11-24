@@ -9,7 +9,7 @@ namespace Assets.Scripts {
         public ItemData item = null;
         public int count = 1;
         private void Start() {
-            if(item != null) {
+            if (item != null) {
                 GetComponentInChildren<MeshFilter>().mesh = item.itemHolderMesh; // renderer
                 GetComponentInChildren<MeshRenderer>().material = item.itemHolderMaterial; // renderer
             }
@@ -19,9 +19,9 @@ namespace Assets.Scripts {
             Character character;
             if ((character = other.GetComponent<Character>()) != null) {
                 // add the item to the inventory
-                character.inventory.StoreItemIntoInventory(item, count);
-                // shrink and remove the item
-                StartCoroutine(DestroyItem());
+                if (character.inventory.StoreItemIntoInventory(item, count))
+                    // shrink and remove the item
+                    StartCoroutine(DestroyItem());
             }
         }
 
@@ -34,10 +34,10 @@ namespace Assets.Scripts {
                 ps.Stop();
             }
             float progression = itemDestroyDuration;
-            while(progression > 0) {
+            while (progression > 0) {
                 yield return null;
                 progression -= Time.deltaTime;
-                transform.localScale = scale * (progression / itemDestroyDuration); 
+                transform.localScale = scale * (progression / itemDestroyDuration);
             }
             Destroy(this.gameObject);
         }
