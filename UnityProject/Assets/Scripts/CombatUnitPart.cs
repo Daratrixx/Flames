@@ -12,6 +12,17 @@ namespace Assets.Scripts {
 
         public CombatUnit rootUnit = null;
 
+        private void Start() {
+            if(rootUnit == null) {
+                Debug.LogError("A unit part was set without a root unit!");
+                Destroy(this);
+            }
+        }
+
+        public override CombatTarget GetRootTarget() {
+            return rootUnit;
+        }
+
         public override CombatTeam GetTeam() {
             return rootUnit.GetTeam();
         }

@@ -17,4 +17,4 @@ MonoBehaviour:
   itemName: Front socks
   itemDescription: Some socks for you!
   itemIcon: {fileID: 0}
-  equipmentSlot: 3
+  equipmentSlot: 4

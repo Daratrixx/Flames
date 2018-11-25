@@ -8,20 +8,42 @@ namespace Assets.Scripts {
 
         public ItemData item = null;
         public int count = 1;
+
+        private bool consumed = false;
+
         private void Start() {
+            InitVisibility();
+        }
+
+        public void InitVisibility() {
             if (item != null) {
                 GetComponentInChildren<MeshFilter>().mesh = item.itemHolderMesh; // renderer
                 GetComponentInChildren<MeshRenderer>().material = item.itemHolderMaterial; // renderer
             }
         }
 
+        private void OnCollisionEnter(Collision collision) {
+            if (consumed) return;
+            if(collision.collider.gameObject.layer == 10) {
+                Debug.Log("Obstacle hit!");
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
+
         private void OnTriggerEnter(Collider other) {
-            Character character;
-            if ((character = other.GetComponent<Character>()) != null) {
+            if (consumed) return;
+            if (other.gameObject.layer == 10) {
+                Debug.Log("Obstacle hit!");
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
+            Looter looter;
+            if ((looter = other.GetComponent<Looter>()) != null) {
                 // add the item to the inventory
-                if (character.inventory.StoreItemIntoInventory(item, count))
+                if (looter.inventory.StoreItemIntoInventory(item, count)) {
+                    consumed = true;
                     // shrink and remove the item
                     StartCoroutine(DestroyItem());
+                }
             }
         }
 

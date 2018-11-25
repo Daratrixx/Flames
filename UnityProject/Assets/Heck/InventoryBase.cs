@@ -11,7 +11,8 @@ public class InventoryBase : UIModelList<InventoryItem> {
     public int maxSize = 10;
 
     public bool StoreItemIntoInventory(ItemData item, int count) {
-        var current = this.Where(x => x.item == item);
+        if (count == 0) return true; // just in case...
+        var current = this.Where(x => x.item.itemId == item.itemId);
         if(current.Count() > 0) {
             current.First().count += count;
             return true;

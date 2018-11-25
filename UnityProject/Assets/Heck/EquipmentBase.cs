@@ -55,5 +55,5 @@ public class InventorySlot {
 }
 
 public enum EquipmentSlot {
-    Head, Chest, Back, Legs, Weapon
+    None, Head, Chest, Back, Legs, Weapon
 }

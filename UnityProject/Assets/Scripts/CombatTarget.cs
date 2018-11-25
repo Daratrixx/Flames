@@ -9,6 +9,8 @@ namespace Assets.Scripts {
 
     public abstract class CombatTarget : MonoBehaviour {
 
+        public abstract CombatTarget GetRootTarget();
+
         public abstract CombatTeam GetTeam();
 
         public abstract bool IsDead();
@@ -18,7 +20,24 @@ namespace Assets.Scripts {
 
         public abstract void Heal(int heal);
 
-        public abstract void Die();
+        public virtual void Die() {
+            FireDeath();
+            Destroy(this);
+        }
+
+        private DeathDelegate onDeath;
+
+        public void FireDeath() {
+            onDeath();
+        }
+
+        public void RegisterDeathListener(DeathDelegate d) {
+            onDeath += d;
+        }
+
+        public void UnregisterDeathListener(DeathDelegate d) {
+            onDeath -= d;
+        }
 
     }
 
@@ -29,3 +48,5 @@ namespace Assets.Scripts {
     }
 
 }
+
+public delegate void DeathDelegate();
