@@ -14,7 +14,13 @@ public class ItemData : ScriptableObject {
     public string itemDescription;
     public Sprite itemIcon;
 
-    public EquipmentSlot equipmentSlot;
+    public EquipmentSlotPosition equipmentSlot;
+
+    public bool isEquipable {
+        get {
+            return equipmentSlot != EquipmentSlotPosition.None;
+        }
+    }
 
     public Dictionary<BodyAttachmentPoint, GameObject> equipmentVisiblePart = new Dictionary<BodyAttachmentPoint, GameObject>();
 
