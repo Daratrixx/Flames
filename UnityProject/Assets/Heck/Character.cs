@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,6 @@ public class Character : Animatable {
     public static List<Character> characters = new List<Character>();
 
     [SerializeField]
-    public InventoryBase inventory= new InventoryBase();
     public CharacterController characterController;
     public AudioSource audioSource;
 
@@ -26,6 +26,10 @@ public class Character : Animatable {
     void Start() {
         PrepareAnimationHelpers();
         characters.Add(this);
+        CombatUnit unit = GetComponent<CombatUnit>();
+        if (unit != null) {
+            unit.RegisterDeathListener(Die);
+        }
     }
 
     public Vector3 forward {
@@ -130,7 +134,7 @@ public class Character : Animatable {
     }
     public void Die() {
         //Destroy(characterController);
-        characterController.enabled = false;
+        //characterController.enabled = false;
         RagDollOnAfterAnimation(deathAnimation);
         inputs = Vector3.zero;
         //Destroy(this);

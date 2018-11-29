@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIListInventory : UI.UIListBase<InventoryItem> {
 
     [SerializeField]
-    public Character characterSource;
+    public Looter characterSource;
 
     private void Start() {
         if (characterSource != null && characterSource.inventory != null)

@@ -39,19 +39,13 @@ public class AIController : MonoBehaviour {
             character.transform.position = info.point;
         originalPosition = character.transform.position;
 
+        unit.RegisterDeathListener(Die);
+
         StartCoroutine(targetUpdateCoroutine = TargetUpdate());
     }
 
     private void Update() {
         if (unit == null) return;
-        if (unit.IsDead()) {
-            character.Die();
-            character = null;
-            Destroy(unit);
-            unit = null;
-            Destroy(this);
-            return;
-        }
         isAtacking = false;
         isFollowing = false;
         isRoaming = false;
@@ -62,6 +56,12 @@ public class AIController : MonoBehaviour {
         } else {
             IdleBehaviour();
         }
+    }
+
+    public void Die() {
+        unit = null;
+        character = null;
+        Destroy(this);
     }
 
     #region combat

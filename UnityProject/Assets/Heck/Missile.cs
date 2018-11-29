@@ -16,8 +16,21 @@ namespace Assets.Scripts {
         public const int obstacleLayer = 10;
         public const int characterLayer = 11;
 
+        public float maxDistance = 20;
+        public float currentDistance = 0;
+
+        private Vector3 origin;
+
+        private void Start() {
+            origin = transform.position;
+        }
+
         private void Update() {
             transform.position += transform.forward * speed * Time.deltaTime;
+            if(Vector3.Distance(origin,transform.position) >= maxDistance) {
+                Debug.Log("Missile expired");
+                Destroy(gameObject);
+            }
         }
 
         private void OnTriggerEnter(Collider other) {
@@ -29,6 +42,8 @@ namespace Assets.Scripts {
             if ((unit = other.GetComponent<CombatTarget>()) != null) {
                 // we hit a unit, damage or heal accordingly and consume the missile
                 if (((int)affects & (int)unit.GetTeam()) == 0) return; // unit is not affected
+                if (affectedTargets.Contains(unit.GetRootTarget())) return; // unit already affected
+                affectedTargets.Add(unit.GetRootTarget());
                 if (heal > 0) unit.Heal(heal);
                 if (damage > 0) unit.Damage(damage);
                 Destroy(gameObject);
@@ -37,6 +52,8 @@ namespace Assets.Scripts {
                 Destroy(gameObject);
             }
         }
+
+        private List<CombatTarget> affectedTargets = new List<CombatTarget>();
 
         public static Missile SpawnMissile(Vector3 position, Vector3 direction, string missilePrefab) {
             return Resources.Load<GameObject>("Prefabs/Missile/" + missilePrefab).GetComponent<Missile>();

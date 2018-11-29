@@ -9,10 +9,16 @@ namespace Assets.Scripts {
 
     public class CombatUnit : CombatTarget {
 
+        public override CombatTarget GetRootTarget() {
+            return this;
+        }
+
         public CombatTeam team = CombatTeam.player;
 
         public int currentHealth;
         public int maxHealth;
+
+        public LootTable lootOnDeath;
 
         public override CombatTeam GetTeam() {
             return team;
@@ -36,7 +42,13 @@ namespace Assets.Scripts {
         }
 
         public override void Die() {
+            base.Die();
+            LootTable.LootUnit(this);
+        }
 
+        private void LateUpdate() {
+            if (IsDead())
+                Die();
         }
 
     }

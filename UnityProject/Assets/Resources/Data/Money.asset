@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5f61fc86b3c47c4a9b23e34eae0a998, type: 3}
-  m_Name: Back socks
+  m_Name: Money
   m_EditorClassIdentifier: 
-  itemHolderMesh: {fileID: 4300000, guid: 79e7733ab381ed6408a574499cfad349, type: 3}
-  itemHolderMaterial: {fileID: 2100000, guid: 3c0cada25e945ff4b8bd1afcd9ef8b63, type: 2}
-  itemId: 1
-  itemName: Back socks
-  itemDescription: Some socks for you!
+  itemHolderMesh: {fileID: 4300000, guid: 2f9ad3b707a6e0242b5d153128b1c213, type: 3}
+  itemHolderMaterial: {fileID: 2100000, guid: 222a123a60c13f840af7f64f2cb084b9, type: 2}
+  itemId: -1
+  itemName: Money
+  itemDescription: Money money money money MF!
   itemIcon: {fileID: 0}
-  equipmentSlot: 4
+  equipmentSlot: 0
