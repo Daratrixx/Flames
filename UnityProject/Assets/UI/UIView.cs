@@ -9,8 +9,10 @@ namespace UI {
 
         public virtual void CreateView(T dataSource) {
             this.dataSource = dataSource;
-            dataSource.RegisterUpdateListener(UpdateView);
-            dataSource.RegisterDeleteListener(DeleteView);
+            if (dataSource != null) {
+                dataSource.RegisterUpdateListener(UpdateView);
+                dataSource.RegisterDeleteListener(DeleteView);
+            }
             UpdateView();
         }
 
@@ -19,7 +21,7 @@ namespace UI {
         public virtual void DeleteView() {
             dataSource.UnregisterUpdateListener(UpdateView);
             dataSource.UnregisterDeleteListener(DeleteView);
-            Destroy(this);
+            Destroy(this.gameObject);
         }
 
         public void ShowView() {

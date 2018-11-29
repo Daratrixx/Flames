@@ -58,10 +58,11 @@ public abstract class UIModelList<T> : List<T>, UIModelInterface where T : UIMod
         base.Add(item);
         FireUpdate();
     }
-    public new void Remove(T item) {
+
+    /*public new void Remove(T item) {
         base.Remove(item);
         FireUpdate();
-    }
+    }*/
 
     public void FireUpdate() {
         OnUpdate();
