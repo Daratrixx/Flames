@@ -32,7 +32,6 @@ public class UIListElementInventory : UI.UIListElementBase<InventoryItem> {
             if(itemCount.text != "x" + dataSource.count)itemCount.text = "x"+dataSource.count;
             if(itemIcon.sprite != dataSource.item.itemIcon) itemIcon.sprite = dataSource.item.itemIcon;
             elementButton.interactable = true;
-            Debug.Log("new count: " + dataSource.count);
         } else {
             itemName.text = "No item";
             itemDescription.text = "Maybe this shouldn't be displayed?";

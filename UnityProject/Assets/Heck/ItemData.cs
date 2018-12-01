@@ -14,6 +14,8 @@ public class ItemData : ScriptableObject {
     public string itemDescription;
     public Sprite itemIcon;
 
+    public int maxStackSize = 0; // >1 is infinite
+
     public EquipmentSlotPosition equipmentSlot;
 
     public bool isEquipable {

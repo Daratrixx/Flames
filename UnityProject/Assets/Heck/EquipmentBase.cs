@@ -18,7 +18,6 @@ public class EquipmentBase : UIModel {
         ItemData output = null;
         if (item == null) return null;
         EquipmentSlot slot = slots[item.equipmentSlot];
-        if (slot.item == item) return item;
         // remove current item, if any
         if (slot.item != null) {
             output = slot.item;
@@ -28,6 +27,8 @@ public class EquipmentBase : UIModel {
             foreach (GameObject go in slot.equipedObject)
                 GameObject.Destroy(go);
             slot.equipedObject.Clear();
+            // put item back inside the inventory
+            if(!inventory.inventory.StoreItemIntoInventory(output, 1)) return null;
         }
         // apply stats
         //TODO
@@ -37,13 +38,15 @@ public class EquipmentBase : UIModel {
             if ((obj = AddObjectToAttachmentPoint(pair.Value, pair.Key)) != null)
                 slot.equipedObject.Add(obj);
         }
-        inventory.inventory.StoreItemIntoInventory(output, 1);
         slot.item = item;
         return output;
     }
     public ItemData UnequipInventorySlot(EquipmentSlot slot) {
         ItemData output = null;
         if (slot.item == null) return null;
+        output = slot.item;
+        if (!inventory.inventory.StoreItemIntoInventory(output, 1)) // check if there is room for the item to be unequipped
+            return null;
         // remove stats
         //TODO
         // remove visible parts
@@ -51,15 +54,13 @@ public class EquipmentBase : UIModel {
             GameObject.Destroy(go);
         slot.equipedObject.Clear();
         // unbind item data
-        output = slot.item;
         slot.item = null;
-        inventory.inventory.StoreItemIntoInventory(output, 1);
         return output;
     }
 
     public GameObject AddObjectToAttachmentPoint(GameObject go, BodyAttachmentPoint ap) {
         Transform anchor = bones[ap];
-        if (anchor) return GameObject.Instantiate(go, anchor);
+        if (anchor != null) return GameObject.Instantiate(go, anchor);
         return null;
     }
 
@@ -71,10 +72,9 @@ public class EquipmentBase : UIModel {
 
 }
 
-[Serializable]
 public class EquipmentSlot : UIModel {
 
-    public EquipmentBase equipment;
+    private EquipmentBase equipment { get; set; }
 
     public EquipmentSlot(EquipmentBase equipment, EquipmentSlotPosition slot) {
         this.equipment = equipment;
@@ -82,7 +82,6 @@ public class EquipmentSlot : UIModel {
     }
 
     public void OnTrigger() {
-        Debug.Log("Trigger on equipment slot " + slot.ToString());
         equipment.UnequipInventorySlot(this);
     }
 

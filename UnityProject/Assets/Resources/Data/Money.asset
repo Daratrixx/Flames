@@ -15,6 +15,7 @@ MonoBehaviour:
   itemHolderMaterial: {fileID: 2100000, guid: 222a123a60c13f840af7f64f2cb084b9, type: 2}
   itemId: -1
   itemName: Money
-  itemDescription: Money money money money MF!
+  itemDescription: Money money money MF!
   itemIcon: {fileID: 0}
+  maxStackSize: 100
   equipmentSlot: 0
