@@ -7,7 +7,7 @@ using System;
 
 namespace Assets.Scripts {
 
-    public class CombatUnit : CombatTarget {
+    public class CombatUnit : CombatTarget, UIModelInterface {
 
         public override CombatTarget GetRootTarget() {
             return this;
@@ -16,7 +16,7 @@ namespace Assets.Scripts {
         public CombatTeam team = CombatTeam.player;
 
         #region stats
-        
+
         public int currentHealth = 100;
 
         [SerializeField]
@@ -56,16 +56,19 @@ namespace Assets.Scripts {
         public override void Damage(int damage) {
             currentHealth -= damage;
             Debug.Log("unit damaged! " + currentHealth + "/" + maxHealth + " health remaining!");
+            FireDamaged();
         }
 
         public override void Damage(int damage, int bonus) {
             currentHealth -= (int)(damage * (100 + bonus - armor) / 100.0f);
             Debug.Log("unit damaged! " + currentHealth + "/" + maxHealth + " health remaining!");
+            FireDamaged();
         }
 
         public override void Damage(int damage, int bonus, int armor) {
             currentHealth -= (int)(damage * (100 + bonus - armor) / 100.0f);
             Debug.Log("unit damaged! " + currentHealth + "/" + maxHealth + " health remaining!");
+            FireDamaged();
         }
 
         public override void Heal(int heal) {
@@ -83,6 +86,61 @@ namespace Assets.Scripts {
                 Die();
         }
 
+        public EmptyDelegate OnDamaged;
+        public EmptyDelegate OnHealed;
+        public EmptyDelegate OnUpdate;
+        public EmptyDelegate OnDelete;
+
+        public void FireDamaged() {
+            if (OnDamaged != null)
+                OnDamaged();
+        }
+        public void FireHealed() {
+            if (OnHealed != null)
+                OnHealed();
+        }
+
+        public void FireUpdate() {
+            if (OnUpdate != null)
+                OnUpdate();
+        }
+
+        public void FireDelete() {
+            if (OnDelete != null)
+                OnDelete();
+        }
+
+        public void RegisterDamagedListener(EmptyDelegate del) {
+            OnDamaged += del;
+        }
+
+        public void RegisterHealedListener(EmptyDelegate del) {
+            OnHealed += del;
+        }
+
+        public void RegisterUpdateListener(EmptyDelegate del) {
+            OnUpdate += del;
+        }
+
+        public void RegisterDeleteListener(EmptyDelegate del) {
+            OnDelete += del;
+        }
+
+        public void UnregisterDamagedListener(EmptyDelegate del) {
+            OnDamaged -= del;
+        }
+
+        public void UnregisterHealedListener(EmptyDelegate del) {
+            OnHealed -= del;
+        }
+
+        public void UnregisterUpdateListener(EmptyDelegate del) {
+            OnUpdate -= del;
+        }
+
+        public void UnregisterDeleteListener(EmptyDelegate del) {
+            OnDelete -= del;
+        }
     }
 
 }
