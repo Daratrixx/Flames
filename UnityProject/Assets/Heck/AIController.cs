@@ -85,7 +85,8 @@ public class AIController : MonoBehaviour {
         // handle attacking target behaviour
         character.Walk(directionToTarget.normalized);
         if (attackCooldown <= 0 && missilePrefab != null) {
-            GameObject.Instantiate(missilePrefab, transform.position + Vector3.up, transform.rotation);
+            Missile m = GameObject.Instantiate(missilePrefab, transform.position + Vector3.up, transform.rotation).GetComponent<Missile>();
+            m.bonus = unit.power;
             attackCooldown = attackRate;
         }
 

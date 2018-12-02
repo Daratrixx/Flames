@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class EquipmentBase : UIModel {
 
     public Looter inventory;
 
+    public CombatUnit unit;
+
     public ItemData EquipItem(ItemData item) {
         ItemData output = null;
         if (item == null) return null;
@@ -22,16 +25,16 @@ public class EquipmentBase : UIModel {
         if (slot.item != null) {
             output = slot.item;
             // remove stats
-            //TODO
+            UnapplyItemStat(slot.item);
             // remove visible parts
             foreach (GameObject go in slot.equipedObject)
                 GameObject.Destroy(go);
             slot.equipedObject.Clear();
             // put item back inside the inventory
-            if(!inventory.inventory.StoreItemIntoInventory(output, 1)) return null;
+            if (!inventory.inventory.StoreItemIntoInventory(output, 1)) return null;
         }
         // apply stats
-        //TODO
+        ApplyItemStat(item);
         // add visible object
         foreach (var pair in item.equipmentVisiblePart) {
             GameObject obj;
@@ -48,7 +51,7 @@ public class EquipmentBase : UIModel {
         if (!inventory.inventory.StoreItemIntoInventory(output, 1)) // check if there is room for the item to be unequipped
             return null;
         // remove stats
-        //TODO
+        UnapplyItemStat(slot.item);
         // remove visible parts
         foreach (GameObject go in slot.equipedObject)
             GameObject.Destroy(go);
@@ -64,8 +67,34 @@ public class EquipmentBase : UIModel {
         return null;
     }
 
+    private void ApplyItemStat(ItemData item) {
+        StatShiftDirection(item.itemStatDecription, 1);
+    }
+
+    private void UnapplyItemStat(ItemData item) {
+        StatShiftDirection(item.itemStatDecription, -1);
+    }
+
+    private void StatShiftDirection(ICollection<ItemStatDescription> stats, int direction) {
+        var type = unit.GetType();
+        //var flag = System.Reflection.BindingFlags.Public;
+        if (direction > 0) {
+            foreach (var p in stats) {
+                var propertyInfo = type.GetProperty(p.statName);
+                if (propertyInfo != null) propertyInfo.SetValue(unit, (int)propertyInfo.GetValue(unit, null) + p.statValue, null);
+                else Debug.Log("Unknown property: " + p.statName);
+            }
+        } else {
+            foreach (var p in stats) {
+                var propertyInfo = type.GetProperty(p.statName);
+                if (propertyInfo != null) propertyInfo.SetValue(unit, (int)propertyInfo.GetValue(unit, null) - p.statValue, null);
+                else Debug.Log("Unknown property: " + p.statName);
+            }
+        }
+    }
+
     public EquipmentBase() {
-        for(EquipmentSlotPosition s = EquipmentSlotPosition.None; s < EquipmentSlotPosition.__LIMIT_DONT_USE; ++s) {
+        for (EquipmentSlotPosition s = EquipmentSlotPosition.None; s < EquipmentSlotPosition.__LIMIT_DONT_USE; ++s) {
             slots.Add(s, new EquipmentSlot(this, s));
         }
     }

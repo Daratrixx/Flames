@@ -12,8 +12,10 @@ namespace Assets.Scripts {
 
         public CombatUnit rootUnit = null;
 
+        public int armor = 0;
+
         private void Start() {
-            if(rootUnit == null) {
+            if (rootUnit == null) {
                 Debug.LogError("A unit part was set without a root unit!");
                 Destroy(this);
             }
@@ -36,6 +38,14 @@ namespace Assets.Scripts {
 
         public override void Damage(int damage) {
             rootUnit.Damage(damage);
+        }
+
+        public override void Damage(int damage, int bonus) {
+            rootUnit.Damage(damage, bonus); // uses the root part armor. pass local armor value to use local armor value
+        }
+
+        public override void Damage(int damage, int bonus, int armor) {
+            rootUnit.Damage(damage, bonus, armor);
         }
 
         public override void Heal(int heal) {

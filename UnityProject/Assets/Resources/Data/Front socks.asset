@@ -19,3 +19,8 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   maxStackSize: 1
   equipmentSlot: 4
+  itemStatDecription:
+  - statName: maxHealth
+    statValue: 50
+  - statName: armor
+    statValue: 10

@@ -11,6 +11,8 @@ namespace Assets.Scripts {
         public int damage = 30;
         public int heal = 0;
 
+        public int bonus = 0;
+
         public float speed = 10;
 
         public const int obstacleLayer = 10;
@@ -45,7 +47,7 @@ namespace Assets.Scripts {
                 if (affectedTargets.Contains(unit.GetRootTarget())) return; // unit already affected
                 affectedTargets.Add(unit.GetRootTarget());
                 if (heal > 0) unit.Heal(heal);
-                if (damage > 0) unit.Damage(damage);
+                if (damage > 0) unit.Damage(damage, bonus);
                 Destroy(gameObject);
             } else if(other.gameObject.layer == obstacleLayer) {
                 Debug.Log("Missile hit a wall!");

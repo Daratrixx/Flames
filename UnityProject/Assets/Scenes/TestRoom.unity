@@ -2053,6 +2053,7 @@ GameObject:
   - component: {fileID: 303139938}
   - component: {fileID: 303139939}
   - component: {fileID: 303139941}
+  - component: {fileID: 303139942}
   m_Layer: 11
   m_Name: Character (Kindled)
   m_TagString: Untagged
@@ -2158,8 +2159,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 1
-  currentHealth: 100
-  maxHealth: 100
+  _currentHealth: 100
+  _maxHealth: 100
+  _armor: 5
+  _power: 0
   lootOnDeath: {fileID: 0}
 --- !u!143 &303139940
 CharacterController:
@@ -2190,8 +2193,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory:
-    equipment: {fileID: 0}
+    equipment: {fileID: 303139942}
     maxSize: 20
+--- !u!114 &303139942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 303139936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b207448b972584d4e9f79d67f2e866a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment:
+    inventory: {fileID: 303139941}
+    unit: {fileID: 303139939}
 --- !u!1 &306606248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,6 +3217,7 @@ MonoBehaviour:
   inputs: {fileID: 11400000, guid: 83c1d50942cb3f245bc066d515dc21b3, type: 2}
   character: {fileID: 303139938}
   playerCamera: {fileID: 419821779}
+  unit: {fileID: 303139939}
   cameraAngleLimits: {x: 25, y: -25}
   cameraAngle: 0
   cameraRotation: -90
@@ -4926,8 +4944,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 1
-  currentHealth: 100
-  maxHealth: 100
+  _currentHealth: 100
+  _maxHealth: 100
+  _armor: 10
+  _power: 0
   lootOnDeath: {fileID: 0}
 --- !u!4 &784433572
 Transform:
@@ -6447,6 +6467,7 @@ MonoBehaviour:
   inputs: {fileID: 11400000, guid: 05fdb414c72060f4d97850d99980c6c1, type: 2}
   character: {fileID: 1453453716}
   playerCamera: {fileID: 419821779}
+  unit: {fileID: 784433571}
   cameraAngleLimits: {x: 25, y: -25}
   cameraAngle: 0
   cameraRotation: -90
@@ -6516,6 +6537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootUnit: {fileID: 2080880548}
+  armor: 0
 --- !u!1 &1109886468
 GameObject:
   m_ObjectHideFlags: 0
@@ -7596,6 +7618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootUnit: {fileID: 784433571}
+  armor: 0
 --- !u!135 &1338640251
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9211,6 +9234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipment:
     inventory: {fileID: 1453453714}
+    unit: {fileID: 784433571}
 --- !u!114 &1453453716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10068,6 +10092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootUnit: {fileID: 303139939}
+  armor: 0
 --- !u!1 &1569673399
 GameObject:
   m_ObjectHideFlags: 0
@@ -11942,8 +11967,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 4
-  currentHealth: 0
-  maxHealth: 100
+  _currentHealth: 100
+  _maxHealth: 100
+  _armor: 50
+  _power: 0
   lootOnDeath: {fileID: 11400000, guid: a7469114fb7424642b69080a48a6fa6a, type: 2}
 --- !u!1 &2081463605
 GameObject:

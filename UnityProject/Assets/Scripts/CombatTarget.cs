@@ -17,6 +17,8 @@ namespace Assets.Scripts {
         public abstract bool IsAlive();
 
         public abstract void Damage(int damage);
+        public abstract void Damage(int damage, int bonus);
+        public abstract void Damage(int damage, int bonus, int armor);
 
         public abstract void Heal(int heal);
 

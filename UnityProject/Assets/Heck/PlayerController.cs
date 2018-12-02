@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System;
-
+using Assets.Scripts;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
 
     public Character character;
     public Camera playerCamera;
+    public Assets.Scripts.CombatUnit unit;
 
     public Vector2 cameraAngleLimits = new Vector2(35,-35);
     public float cameraAngle = 20;
@@ -128,9 +129,10 @@ public class PlayerController : MonoBehaviour {
         float forWalk = movement.y;
         float sideWalk = movement.x;
         if(inputs.ShootPressed() && missilePrefab != null) {
-            GameObject.Instantiate(missilePrefab, cameraAnchor, playerCamera.transform.rotation);
+            Missile m = GameObject.Instantiate(missilePrefab, cameraAnchor, playerCamera.transform.rotation).GetComponent<Missile>();
+            m.bonus = unit.power;
         }
-        if (movement.magnitude > 0.001f) {
+        if (movement.magnitude > 0.01f) {
             Vector3 direction = playerCamera.transform.forward * forWalk + playerCamera.transform.right * sideWalk;
             direction.y = 0;
             if(inputs.JumpPressed()) {

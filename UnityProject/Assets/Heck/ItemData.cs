@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item Data", menuName = "ItemData")]
 public class ItemData : ScriptableObject {
 
+    private void Awake() {
+        //foreach(var e in itemStatDecription) {
+        //    bonusStats.Add(e.statName, e.statValue);
+        //}
+    }
+
     public Mesh itemHolderMesh;
     public Material itemHolderMaterial;
 
@@ -26,6 +32,16 @@ public class ItemData : ScriptableObject {
 
     public Dictionary<BodyAttachmentPoint, GameObject> equipmentVisiblePart = new Dictionary<BodyAttachmentPoint, GameObject>();
 
+    //public Dictionary<string, int> bonusStats = new Dictionary<string, int>();
+
+    public List<ItemStatDescription> itemStatDecription = new List<ItemStatDescription>();
+
+}
+
+[System.Serializable]
+public struct ItemStatDescription {
+    public string statName;
+    public int statValue;
 }
 
 public enum BodyAttachmentPoint {
