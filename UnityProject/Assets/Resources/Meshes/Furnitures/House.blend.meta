@@ -14,6 +14,7 @@ ModelImporter:
     3300000: //RootNode
     3300002: Cube
     4300000: Cube
+    6400000: Cube
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -52,9 +53,9 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.75
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
@@ -93,7 +94,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1

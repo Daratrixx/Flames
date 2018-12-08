@@ -39,6 +39,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 61e82562d71365041a4a6d48aa80aaa3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material_001
     second: {fileID: 2100000, guid: 01a8ec17a0294b34884a97c36029183a, type: 2}
   - first:
@@ -81,7 +86,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.65
     meshCompression: 0
     addColliders: 1
     importVisibility: 0
