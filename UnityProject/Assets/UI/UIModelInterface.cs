@@ -24,11 +24,13 @@ public abstract class UIModel : UIModelInterface {
     public EmptyDelegate OnDelete;
 
     public void FireUpdate() {
-        OnUpdate();
+        if (OnUpdate != null)
+            OnUpdate();
     }
 
     public void FireDelete() {
-        OnDelete();
+        if (OnDelete != null)
+            OnDelete();
     }
 
     public void RegisterUpdateListener(EmptyDelegate del) {
@@ -65,11 +67,13 @@ public abstract class UIModelList<T> : List<T>, UIModelInterface where T : UIMod
     }*/
 
     public void FireUpdate() {
-        OnUpdate();
+        if (OnUpdate != null)
+            OnUpdate();
     }
 
     public void FireDelete() {
-        OnDelete();
+        if (OnDelete != null)
+            OnDelete();
     }
 
     public void RegisterUpdateListener(EmptyDelegate del) {
