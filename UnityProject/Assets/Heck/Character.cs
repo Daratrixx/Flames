@@ -134,7 +134,7 @@ public class Character : Animatable {
     }
     public void Die() {
         //Destroy(characterController);
-        //characterController.enabled = false;
+        characterController.enabled = false;
         RagDollOnAfterAnimation(deathAnimation);
         inputs = Vector3.zero;
         //Destroy(this);

@@ -66,7 +66,7 @@ public class AIController : MonoBehaviour {
 
     #region combat
 
-    protected void CombatBehaviour() {
+    protected virtual void CombatBehaviour() {
         directionToTarget = target.transform.position - transform.position;
         distanceToTarget = directionToTarget.magnitude;
         if (!AttackTarget()) // if target isn't in attack range, try to catch up
@@ -78,7 +78,7 @@ public class AIController : MonoBehaviour {
     public float attackRate = 1;
     protected float attackCooldown = 0;
 
-    protected bool AttackTarget() {
+    protected virtual bool AttackTarget() {
         if (distanceToTarget > attackDistance) return false;
         isAtacking = true;
         directionToTarget.y = 0;
@@ -107,7 +107,7 @@ public class AIController : MonoBehaviour {
 
     #region idle
 
-    protected void IdleBehaviour() {
+    protected virtual void IdleBehaviour() {
         Vector3 directionToOrigin = originalPosition - transform.position;
         distanceToOrigin = directionToOrigin.magnitude;
         directionToOrigin.y = 0;
