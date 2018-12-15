@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class UVShifter : MonoBehaviour {
 
+    public UVShifterParameter[] parameters = new UVShifterParameter[0];
+
     public Vector2 shiftSpeed;
     public string textureName = "PLZ SET!!";
     public float scaleFactor = 1;
 
     private Material material;
-    private Vector2 offset;
-
 
     // Use this for initialization
     void Start() {
@@ -19,12 +19,9 @@ public class UVShifter : MonoBehaviour {
             if (material == null)
                 Destroy(this);
             else {
-                material.SetTextureScale(textureName, new Vector2(transform.lossyScale.x * scaleFactor, transform.lossyScale.z * scaleFactor));
-                offset = material.GetTextureOffset(textureName);
-                foreach (string s in material.shaderKeywords) {
-                    Debug.Log(s);
+                foreach (var p in parameters) {
+                   p.SetScale(material, transform.lossyScale.x, transform.lossyScale.z);
                 }
-                Debug.Log(material.ToString());
             }
         } catch {
             Destroy(this);
@@ -33,7 +30,31 @@ public class UVShifter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        offset += shiftSpeed * Time.deltaTime;
-        material.SetTextureOffset(textureName, offset);
+        foreach (var p in parameters) {
+            p.Shift(material);
+        }
     }
+}
+
+[System.Serializable]
+public class UVShifterParameter {
+
+    public UVShifterParameter(string name, float scale, Vector2 speed) {
+        textureName = name;
+        scaleFactor = scale;
+        shiftSpeed = speed;
+    }
+
+    public string textureName = "PLZ SET!!";
+    public float scaleFactor = 1;
+    public Vector2 shiftSpeed;
+
+    public void SetScale(Material m, float w, float h) {
+        m.SetTextureScale(textureName, new Vector2(w * scaleFactor, h * scaleFactor));
+    }
+
+    public void Shift(Material m) {
+        m.SetTextureOffset(textureName, shiftSpeed * Time.time);
+    }
+
 }
