@@ -131,7 +131,10 @@ MonoBehaviour:
   affects: 1
   damage: 30
   heal: 0
+  bonus: 0
   speed: 20
+  maxDistance: 20
+  currentDistance: 0
 --- !u!198 &198097724002998406
 ParticleSystem:
   m_ObjectHideFlags: 1
